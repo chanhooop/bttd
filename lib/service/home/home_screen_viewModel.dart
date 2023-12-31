@@ -8,25 +8,29 @@ part 'home_screen_viewModel.freezed.dart';
 class HomeScreenViewModel with _$HomeScreenViewModel {
   factory HomeScreenViewModel({
     BoardModelList? list,
+    required bool listDataError,
   }) = _HomeScreenViewModel;
 }
 
 final homeScreenProvider =
     StateNotifierProvider<HomeScreenNotifier, HomeScreenViewModel>(
-        (ref) => HomeScreenNotifier(HomeScreenViewModel()));
+        (ref) => HomeScreenNotifier(HomeScreenViewModel(listDataError: false)));
 
 class HomeScreenNotifier extends StateNotifier<HomeScreenViewModel> {
   final BoardRepository _boardRepository = BoardRepository();
 
   HomeScreenNotifier(super._state) {
-    _initData();
+    initData();
   }
 
   /// 데이터 초기화
-  Future<HomeScreenViewModel> _initData() async {
-    print('_initData');
-    BoardModelList _list = await _boardRepository.getBoardList();
-    return state = state.copyWith(list: _list);
+  Future<HomeScreenViewModel> initData() async {
+    try {
+      BoardModelList _list = await _boardRepository.getBoardList();
+      return state = state.copyWith(list: _list);
+    } catch (e) {
+      return state = state.copyWith(listDataError: true);
+    }
   }
 
   // 테스트
@@ -34,11 +38,9 @@ class HomeScreenNotifier extends StateNotifier<HomeScreenViewModel> {
     List<BoardModel> test = [];
     List<BoardModel> _boardModel = state.list!.data!;
     _boardModel.forEach((element) {
-      print('걸림');
       if (element.post_title == 'tttt123ttt') {
         element = element.copyWith(post_title: '테스트입니다.');
       }
-      print(element.post_title);
       test.add(element);
     });
     state = state.copyWith(list: state.list!.copyWith(data: test));

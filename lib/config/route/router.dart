@@ -1,4 +1,3 @@
-import 'package:bttd/1.dart';
 import 'package:bttd/2.dart';
 import 'package:bttd/3.dart';
 import 'package:bttd/3_1.dart';
@@ -14,7 +13,6 @@ final GoRouter router = GoRouter(
   navigatorKey: _rootKey,
   initialLocation: HomeScreen.routeName,
   routes: <RouteBase>[
-    // GoRoute(path: '/'),
     StatefulShellRoute.indexedStack(
       builder: (BuildContext context, GoRouterState state,
               StatefulNavigationShell navigationShell) =>

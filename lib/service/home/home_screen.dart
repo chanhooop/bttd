@@ -1,5 +1,4 @@
 import 'package:bttd/core/default_layout.dart';
-import 'package:bttd/dataSource/model/board_model.dart';
 import 'package:bttd/service/home/home_screen_viewModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -13,32 +12,36 @@ class HomeScreen extends ConsumerWidget {
     final state = ref.watch(homeScreenProvider);
     return DefaultLayout(
         title: 'BTTD',
-        body: Column(
-          children: [
-            if (state.list == null) ...[
-              Center(
-                child: CircularProgressIndicator(),
+        body: state.listDataError
+            ? Container(
+                child: Center(child: Text('데이터 송수신 에러')),
               )
-            ],
-            if (state.list != null) ...[
-              ...state.list!.data!.map((e) => ListTile(
-                    title: Text(e.post_title ?? ''),
-                    subtitle: Text(e.post_context ?? ''),
-                  )),
-              ElevatedButton(
-                onPressed: () {
-                  ref.read(homeScreenProvider.notifier).test();
-                },
-                child: Text('테스트 버튼'),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  ref.read(homeScreenProvider.notifier).test2();
-                },
-                child: Text('테스트 버튼2'),
-              ),
-            ]
-          ],
-        ));
+            : Column(
+                children: [
+                  if (state.list == null) ...[
+                    Center(
+                      child: CircularProgressIndicator(),
+                    )
+                  ],
+                  if (state.list != null) ...[
+                    ...state.list!.data!.map((e) => ListTile(
+                          title: Text(e.post_title ?? ''),
+                          subtitle: Text(e.post_context ?? ''),
+                        )),
+                    ElevatedButton(
+                      onPressed: () {
+                        ref.read(homeScreenProvider.notifier).test();
+                      },
+                      child: Text('테스트 버튼'),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        ref.read(homeScreenProvider.notifier).test2();
+                      },
+                      child: Text('테스트 버튼2'),
+                    ),
+                  ]
+                ],
+              ));
   }
 }
