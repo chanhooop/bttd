@@ -6,29 +6,37 @@ import 'package:bttd/core/bottom_navigation_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-final rootKey = GlobalKey<NavigatorState>();
+import '../../service/home/home_screen.dart';
+
+final _rootKey = GlobalKey<NavigatorState>();
 
 final GoRouter router = GoRouter(
-  navigatorKey: rootKey,
-  initialLocation: '/1',
+  navigatorKey: _rootKey,
+  initialLocation: HomeScreen.routeName,
   routes: <RouteBase>[
+    // GoRoute(path: '/'),
     StatefulShellRoute.indexedStack(
       builder: (BuildContext context, GoRouterState state,
               StatefulNavigationShell navigationShell) =>
           BottomNavigationLayout(navigationShell: navigationShell),
       branches: <StatefulShellBranch>[
+        /// 1번 BottomNavigation 탭
         StatefulShellBranch(routes: <RouteBase>[
           GoRoute(
-            path: '/1',
-            builder: (context, state) => const Screen1(),
+            path: HomeScreen.routeName,
+            builder: (context, state) => const HomeScreen(),
           ),
         ]),
+
+        /// 2번 BottomNavigation 탭
         StatefulShellBranch(routes: <RouteBase>[
           GoRoute(
-            path: '/2',
+            path: '/home',
             builder: (context, state) => const Screen2(),
           ),
         ]),
+
+        /// 3번 BottomNavigation 탭
         StatefulShellBranch(routes: <RouteBase>[
           GoRoute(
             path: '/3',
@@ -36,7 +44,7 @@ final GoRouter router = GoRouter(
             routes: [
               GoRoute(
                 path: '3_1',
-                parentNavigatorKey: rootKey,
+                parentNavigatorKey: _rootKey,
                 builder: (context, state) => const Screen3_1(),
               ),
             ],
