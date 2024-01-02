@@ -1,7 +1,8 @@
-import 'package:bttd/2.dart';
+import 'package:bttd/1.dart';
 import 'package:bttd/3.dart';
 import 'package:bttd/3_1.dart';
-import 'package:bttd/core/bottom_navigation_layout.dart';
+import 'package:bttd/core/layout/bottom_navigation_layout.dart';
+import 'package:bttd/service/home/post_detail_view.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -11,7 +12,7 @@ final _rootKey = GlobalKey<NavigatorState>();
 
 final GoRouter router = GoRouter(
   navigatorKey: _rootKey,
-  initialLocation: HomeScreen.routeName,
+  initialLocation: '/${HomeScreen.routeName}',
   routes: <RouteBase>[
     StatefulShellRoute.indexedStack(
       builder: (BuildContext context, GoRouterState state,
@@ -21,16 +22,25 @@ final GoRouter router = GoRouter(
         /// 1번 BottomNavigation 탭
         StatefulShellBranch(routes: <RouteBase>[
           GoRoute(
-            path: HomeScreen.routeName,
-            builder: (context, state) => const HomeScreen(),
+            path: '/1',
+            builder: (context, state) => const Screen1(),
           ),
         ]),
 
         /// 2번 BottomNavigation 탭
         StatefulShellBranch(routes: <RouteBase>[
           GoRoute(
-            path: '/home',
-            builder: (context, state) => const Screen2(),
+            path: '/${HomeScreen.routeName}',
+            name: '${HomeScreen.routeName}',
+            builder: (context, state) => const HomeScreen(),
+            routes: [
+              GoRoute(
+                path: PostDetailView.routeName,
+                name: PostDetailView.routeName,
+                parentNavigatorKey: _rootKey,
+                builder: (context, state) => const PostDetailView(),
+              ),
+            ],
           ),
         ]),
 

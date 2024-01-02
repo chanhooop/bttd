@@ -7,7 +7,6 @@ class DataSource {
   Future<BoardModelList> getBoardList() async {
     print('DataSource => getBoardList');
     Response _response = await dio.get('/api/getAllBoard');
-
     return BoardModelList.fromJson(_response.data);
   }
 }

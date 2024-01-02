@@ -22,9 +22,10 @@ class BottomNavigationLayout extends StatelessWidget {
         backgroundColor: const Color(0xffe0b9f6),
         currentIndex: navigationShell.currentIndex,
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.one_k), label: '1'),
-          BottomNavigationBarItem(icon: Icon(Icons.two_k), label: '2'),
-          BottomNavigationBarItem(icon: Icon(Icons.three_k), label: '3'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.library_add_check), label: '매칭'),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: '홈'),
+          BottomNavigationBarItem(icon: Icon(Icons.chat), label: '채팅'),
         ],
       ),
     );

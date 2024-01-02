@@ -1,4 +1,4 @@
-import 'package:bttd/core/default_layout.dart';
+import 'package:bttd/core/layout/default_layout.dart';
 import 'package:flutter/material.dart';
 
 class Screen3 extends StatelessWidget {

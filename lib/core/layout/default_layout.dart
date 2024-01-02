@@ -4,12 +4,16 @@ class DefaultLayout extends StatelessWidget {
   const DefaultLayout({
     required this.title,
     required this.body,
+    this.leading,
     this.actions,
+    this.drawer,
     Key? key,
   }) : super(key: key);
 
   final String title;
   final Widget body;
+  final Widget? leading;
+  final Widget? drawer;
   final List<Widget>? actions;
 
   @override
@@ -17,9 +21,10 @@ class DefaultLayout extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           title: Text(title),
+          leading: leading,
           actions: actions,
         ),
-        body: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16), child: body));
+        drawer: drawer,
+        body: body);
   }
 }
