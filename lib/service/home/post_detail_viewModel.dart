@@ -22,6 +22,6 @@ class PostDetailViewNotifier extends StateNotifier<PostDetailViewModel> {
   // 디테일 포스트 화면으로 진입
   void goDetailView(BuildContext context, BoardModel boardModel) {
     state = state.copyWith(boardModel: boardModel);
-    context.goNamed(PostDetailView.routeName);
+    context.pushNamed(PostDetailView.routeName);
   }
 }

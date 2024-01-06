@@ -28,6 +28,7 @@ class HomeScreenNotifier extends StateNotifier<HomeScreenViewModel> {
 
   /// 데이터 초기화
   Future<HomeScreenViewModel> initData() async {
+    print('HomeScreenViewModel : initData');
     try {
       BoardModelList _list = await _boardRepository.getBoardList();
       return state = state.copyWith(list: _list);

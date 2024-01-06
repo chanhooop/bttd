@@ -6,7 +6,7 @@ class BoardRepository {
   late BoardModelList cachedBoardListData = BoardModelList(); // 홈 전체 리스트
   late BoardModel cachedBoardModel = BoardModel(); // 각각 디테일 화면 관련 데이터
 
-  // 홈 화면 전체 리스트 데이터
+  /// 홈 화면 전체 리스트 데이터
   Future<BoardModelList> getBoardList({bool cached = false}) async {
     print('BoardRepository => getBoardList');
     if (!cached) {
@@ -17,7 +17,7 @@ class BoardRepository {
     }
   }
 
-  // 각각 게시글 데이터
+  /// 각각 게시글 데이터
   Future<BoardModel> getBoard({bool cached = false}) async {
     print('BoardRepository => getBoard');
     // if (!cached) {

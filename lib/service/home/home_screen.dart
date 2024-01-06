@@ -1,8 +1,11 @@
 import 'package:bttd/core/layout/default_layout.dart';
+import 'package:bttd/core/widget/drawer_widget.dart';
 import 'package:bttd/service/home/home_screen_viewModel.dart';
+import 'package:bttd/service/home/post_detail_view.dart';
 import 'package:bttd/service/home/post_detail_viewModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 class HomeScreen extends ConsumerWidget {
   static const routeName = "HomeScreen";
@@ -10,13 +13,33 @@ class HomeScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    print(1);
     final state = ref.watch(homeScreenProvider);
+    print(2);
     return DefaultLayout(
         title: 'Be The Top Dog',
-        leading: Icon(Icons.menu),
+        isdrawer: true,
+        // leading: GestureDetector(
+        //   onTap: () {
+        //     Scaffold.of(context).openDrawer();
+        //   },
+        //   child: Icon(Icons.menu),
+        // ),
         body: state.listDataError
             ? Container(
-                child: Center(child: Text('데이터 송수신 에러')),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Center(
+                      child: Text('데이터 송수신 에러'),
+                    ),
+                    ElevatedButton(
+                        onPressed: () {
+                          context.pushNamed(PostDetailView.routeName);
+                        },
+                        child: Text('디테일 뷰로 이동'))
+                  ],
+                ),
               )
             : Column(
                 children: [

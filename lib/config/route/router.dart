@@ -1,7 +1,8 @@
-import 'package:bttd/1.dart';
 import 'package:bttd/3.dart';
 import 'package:bttd/3_1.dart';
 import 'package:bttd/core/layout/bottom_navigation_layout.dart';
+import 'package:bttd/service/home/matching_screen.dart';
+import 'package:bttd/service/home/post_add_screen.dart';
 import 'package:bttd/service/home/post_detail_view.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -22,9 +23,15 @@ final GoRouter router = GoRouter(
         /// 1번 BottomNavigation 탭
         StatefulShellBranch(routes: <RouteBase>[
           GoRoute(
-            path: '/1',
-            builder: (context, state) => const Screen1(),
-          ),
+              path: '/${MatchingScreen.routeName}',
+              name: MatchingScreen.routeName,
+              builder: (context, state) => const MatchingScreen(),
+              routes: [
+                GoRoute(
+                    path: PostAddScreen.routeName,
+                    name: PostAddScreen.routeName,
+                    builder: (context, state) => const PostAddScreen()),
+              ]),
         ]),
 
         /// 2번 BottomNavigation 탭
@@ -52,6 +59,7 @@ final GoRouter router = GoRouter(
             routes: [
               GoRoute(
                 path: '3_1',
+                name: '3_1',
                 parentNavigatorKey: _rootKey,
                 builder: (context, state) => const Screen3_1(),
               ),
