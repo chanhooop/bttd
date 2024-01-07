@@ -1,12 +1,14 @@
 import 'package:bttd/3.dart';
 import 'package:bttd/3_1.dart';
 import 'package:bttd/core/layout/bottom_navigation_layout.dart';
+import 'package:bttd/service/game/confirm_game_screen.dart';
 import 'package:bttd/service/home/matching_screen.dart';
 import 'package:bttd/service/home/post_add_screen.dart';
 import 'package:bttd/service/home/post_detail_view.dart';
+import 'package:bttd/service/user/sign_in_screen.dart';
+import 'package:bttd/service/user/sign_up_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-
 import '../../service/home/home_screen.dart';
 
 final _rootKey = GlobalKey<NavigatorState>();
@@ -15,6 +17,21 @@ final GoRouter router = GoRouter(
   navigatorKey: _rootKey,
   initialLocation: '/${HomeScreen.routeName}',
   routes: <RouteBase>[
+    GoRoute(
+      path: '/${SignUpScreen.routeName}',
+    name: SignUpScreen.routeName,
+      builder: (context, state)=>SignUpScreen(),
+    ),
+    GoRoute(
+      path: '/${SignInScreen.routeName}',
+      name: SignInScreen.routeName,
+      builder: (context, state)=>SignInScreen(),
+    ),
+    GoRoute(
+      path: '/${ConfirmGameScreen.routeName}',
+      name: ConfirmGameScreen.routeName,
+      builder: (context, state)=>ConfirmGameScreen(),
+    ),
     StatefulShellRoute.indexedStack(
       builder: (BuildContext context, GoRouterState state,
               StatefulNavigationShell navigationShell) =>

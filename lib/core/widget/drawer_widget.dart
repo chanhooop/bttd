@@ -1,4 +1,7 @@
+import 'package:bttd/service/game/confirm_game_screen.dart';
 import 'package:bttd/service/home/matching_screen.dart';
+import 'package:bttd/service/user/sign_in_screen.dart';
+import 'package:bttd/service/user/sign_up_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -77,7 +80,9 @@ class DrawerWidget extends StatelessWidget {
               GestureDetector(
                 onTap: () {
                   Scaffold.of(context).closeDrawer();
-                  Future.delayed(Duration(milliseconds: 240)).then((value) {});
+                  Future.delayed(Duration(milliseconds: 240)).then((value) {
+                    context.pushNamed(ConfirmGameScreen.routeName);
+                  });
                 },
                 child: Padding(
                   padding: EdgeInsets.symmetric(vertical: 10),
@@ -90,6 +95,54 @@ class DrawerWidget extends StatelessWidget {
                       SizedBox(width: 10),
                       Text(
                         '승부확정',
+                        style: TextStyle(fontSize: 20),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  Scaffold.of(context).closeDrawer();
+                  Future.delayed(Duration(milliseconds: 240)).then((value) {
+                    context.pushNamed(SignInScreen.routeName);
+                  });
+                },
+                child: Padding(
+                  padding: EdgeInsets.symmetric(vertical: 10),
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.login,
+                        size: 35,
+                      ),
+                      SizedBox(width: 10),
+                      Text(
+                        '로그인',
+                        style: TextStyle(fontSize: 20),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  Scaffold.of(context).closeDrawer();
+                  Future.delayed(Duration(milliseconds: 240)).then((value) {
+                    context.pushNamed(SignUpScreen.routeName);
+                  });
+                },
+                child: Padding(
+                  padding: EdgeInsets.symmetric(vertical: 10),
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.emoji_people,
+                        size: 35,
+                      ),
+                      SizedBox(width: 10),
+                      Text(
+                        '회원가입',
                         style: TextStyle(fontSize: 20),
                       ),
                     ],
