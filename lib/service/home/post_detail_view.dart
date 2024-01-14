@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class PostDetailView extends ConsumerWidget {
   static const routeName = 'PostDetailView';
+
   const PostDetailView({Key? key}) : super(key: key);
 
   @override
@@ -97,10 +98,12 @@ class PostDetailView extends ConsumerWidget {
           Row(
             children: [
               SizedBox(
-                  width: 100,
-                  height: 100,
-                  child:
-                  CustomNetworkImageWidget(imgurl: '', assetImgPath: 'assets/images/profile_image.jpeg',),
+                width: 100,
+                height: 100,
+                child: CustomNetworkImageWidget(
+                  imgurl: '',
+                  assetImgPath: 'assets/images/profile_image.jpeg',
+                ),
               ),
               Expanded(
                   child: Padding(

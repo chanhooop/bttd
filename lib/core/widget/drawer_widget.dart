@@ -1,3 +1,4 @@
+import 'package:bttd/core/widget/custom_network_image_widget.dart';
 import 'package:bttd/service/game/confirm_game_screen.dart';
 import 'package:bttd/service/home/matching_screen.dart';
 import 'package:bttd/service/user/my_info_view.dart';
@@ -21,9 +22,13 @@ class DrawerWidget extends StatelessWidget {
               Row(
                 children: [
                   SizedBox(
-                      width: 100,
-                      height: 100,
-                      child: Image.asset('assets/images/profile_image.jpeg')),
+                    width: 100,
+                    height: 100,
+                    child: CustomNetworkImageWidget(
+                      imgurl: '',
+                      assetImgPath: 'assets/images/profile_image.jpeg',
+                    ),
+                  ),
                   Expanded(
                       child: Center(
                           child: Text(
