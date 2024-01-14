@@ -5,8 +5,9 @@ import 'package:bttd/service/game/confirm_game_screen.dart';
 import 'package:bttd/service/home/matching_screen.dart';
 import 'package:bttd/service/home/post_add_screen.dart';
 import 'package:bttd/service/home/post_detail_view.dart';
-import 'package:bttd/service/user/sign_in_screen.dart';
-import 'package:bttd/service/user/sign_up_screen.dart';
+import 'package:bttd/service/user/my_info_view.dart';
+import 'package:bttd/service/user/sign_in_view.dart';
+import 'package:bttd/service/user/sign_up_view.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../service/home/home_screen.dart';
@@ -17,20 +18,29 @@ final GoRouter router = GoRouter(
   navigatorKey: _rootKey,
   initialLocation: '/${HomeScreen.routeName}',
   routes: <RouteBase>[
+    /// 로그인 화면
     GoRoute(
-      path: '/${SignUpScreen.routeName}',
-    name: SignUpScreen.routeName,
-      builder: (context, state)=>SignUpScreen(),
+      path: '/${SignUpView.routeName}',
+    name: SignUpView.routeName,
+      builder: (context, state)=>SignUpView(),
     ),
+    /// 회원가입 화면
     GoRoute(
-      path: '/${SignInScreen.routeName}',
-      name: SignInScreen.routeName,
-      builder: (context, state)=>SignInScreen(),
+      path: '/${SignInView.routeName}',
+      name: SignInView.routeName,
+      builder: (context, state)=>SignInView(),
     ),
+    /// 승부확정 확면
     GoRoute(
       path: '/${ConfirmGameScreen.routeName}',
       name: ConfirmGameScreen.routeName,
       builder: (context, state)=>ConfirmGameScreen(),
+    ),
+    /// 내 정보 화면
+    GoRoute(
+      path: '/${MyInfoView.routeName}',
+      name: MyInfoView.routeName,
+      builder: (context, state)=>MyInfoView(),
     ),
     StatefulShellRoute.indexedStack(
       builder: (BuildContext context, GoRouterState state,

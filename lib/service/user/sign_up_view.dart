@@ -3,10 +3,10 @@ import 'package:bttd/core/layout/default_layout.dart';
 import 'package:bttd/core/widget/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 
-class SignUpScreen extends StatelessWidget {
+class SignUpView extends StatelessWidget {
   static String routeName = 'SignUpScreen';
 
-  const SignUpScreen({super.key});
+  const SignUpView({super.key});
 
   @override
   Widget build(BuildContext context) {

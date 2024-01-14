@@ -1,7 +1,8 @@
 import 'package:bttd/service/game/confirm_game_screen.dart';
 import 'package:bttd/service/home/matching_screen.dart';
-import 'package:bttd/service/user/sign_in_screen.dart';
-import 'package:bttd/service/user/sign_up_screen.dart';
+import 'package:bttd/service/user/my_info_view.dart';
+import 'package:bttd/service/user/sign_in_view.dart';
+import 'package:bttd/service/user/sign_up_view.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -35,7 +36,9 @@ class DrawerWidget extends StatelessWidget {
               GestureDetector(
                 onTap: () {
                   Scaffold.of(context).closeDrawer();
-                  Future.delayed(Duration(milliseconds: 240)).then((value) {});
+                  Future.delayed(Duration(milliseconds: 240)).then((value) {
+                    context.pushNamed(MyInfoView.routeName);
+                  });
                 },
                 child: Padding(
                   padding: EdgeInsets.symmetric(vertical: 10),
@@ -105,7 +108,7 @@ class DrawerWidget extends StatelessWidget {
                 onTap: () {
                   Scaffold.of(context).closeDrawer();
                   Future.delayed(Duration(milliseconds: 240)).then((value) {
-                    context.pushNamed(SignInScreen.routeName);
+                    context.pushNamed(SignInView.routeName);
                   });
                 },
                 child: Padding(
@@ -129,7 +132,7 @@ class DrawerWidget extends StatelessWidget {
                 onTap: () {
                   Scaffold.of(context).closeDrawer();
                   Future.delayed(Duration(milliseconds: 240)).then((value) {
-                    context.pushNamed(SignUpScreen.routeName);
+                    context.pushNamed(SignUpView.routeName);
                   });
                 },
                 child: Padding(

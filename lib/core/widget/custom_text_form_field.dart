@@ -9,16 +9,17 @@ class CustomTextFormField extends StatelessWidget {
   final int? maxLine;
   final bool? expands;
   final ValueChanged<String>? onChanged;
+  final TextEditingController? textEditingController;
 
   const CustomTextFormField(
       {Key? key,
       this.hintText,
       this.errorText,
       this.obscureText = false,
-      this.autofocus = true,
+      this.autofocus = false,
       this.onChanged,
       this.maxLine = 1,
-      this.expands})
+      this.expands, this.textEditingController})
       : super(key: key);
 
   @override
@@ -31,6 +32,7 @@ class CustomTextFormField extends StatelessWidget {
 
     return SizedBox(
       child: TextFormField(
+        controller: textEditingController,
         maxLines: maxLine,
         expands: expands ?? false,
         textAlign: TextAlign.start,
