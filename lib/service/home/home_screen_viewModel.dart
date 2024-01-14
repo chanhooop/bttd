@@ -31,7 +31,7 @@ class HomeScreenNotifier extends StateNotifier<HomeScreenViewModel> {
     print('HomeScreenViewModel : initData');
     try {
       BoardModelList _list = await _boardRepository.getBoardList();
-      return state = state.copyWith(list: _list);
+      return state = state.copyWith(list: _list, listDataError: false);
     } catch (e) {
       return state = state.copyWith(listDataError: true);
     }
