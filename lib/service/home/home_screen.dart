@@ -1,5 +1,4 @@
 import 'package:bttd/core/layout/default_layout.dart';
-import 'package:bttd/core/widget/drawer_widget.dart';
 import 'package:bttd/service/home/home_screen_viewModel.dart';
 import 'package:bttd/service/home/post_detail_view.dart';
 import 'package:bttd/service/home/post_detail_viewModel.dart';
@@ -13,9 +12,7 @@ class HomeScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    print(1);
     final state = ref.watch(homeScreenProvider);
-    print(2);
     return DefaultLayout(
         title: 'Be The Top Dog',
         isdrawer: true,
@@ -60,7 +57,7 @@ class HomeScreen extends ConsumerWidget {
                                     borderRadius: BorderRadius.circular(5),
                                     color: Colors.green.withOpacity(0.5)),
                                 child: Center(
-                                  child: Text('모집중'),
+                                  child: e.user_id == null ? Text('모집중') : Text(e.user_id.toString()),
                                 ),
                               ),
                               title: Text(
@@ -84,7 +81,7 @@ class HomeScreen extends ConsumerWidget {
                                     ),
                                     Padding(
                                       padding: EdgeInsets.only(left: 5.0),
-                                      child: Text('2'), // 댓글 수
+                                      child: Text(e.comment_count.toString()), // 댓글 수
                                     ),
                                   ],
                                 ),

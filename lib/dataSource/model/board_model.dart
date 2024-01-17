@@ -19,6 +19,9 @@ class BoardModel with _$BoardModel {
     String? user_id,
     String? post_title,
     String? post_context,
+    String? away_id,
+    String? score,
+    int? comment_count,
   }) = _BoardModel;
 
   factory BoardModel.fromJson(Map<String, dynamic> json) =>

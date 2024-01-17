@@ -1,15 +1,18 @@
 import 'package:bttd/config/theme/text_style.dart';
 import 'package:bttd/core/layout/default_layout.dart';
 import 'package:bttd/core/widget/custom_text_form_field.dart';
+import 'package:bttd/service/user/sign_up_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class SignUpView extends StatelessWidget {
+class SignUpView extends ConsumerWidget {
   static String routeName = 'SignUpScreen';
 
-  const SignUpView({super.key});
+  const SignUpView({Key? key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(SignUpViewProvider);
     return DefaultLayout(
       title: '회원가입',
       body: Padding(
@@ -25,10 +28,14 @@ class SignUpView extends StatelessWidget {
                     style: INPUT_TEXTSTYLE,
                   ),
                   Expanded(
-                    child: CustomTextFormField(),
+                    child: CustomTextFormField(
+                    textEditingController: state.emailTxtCtr,
+                    ),
                   ),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      ref.read(SignUpViewProvider.notifier).emailDoubleCheck();
+                    },
                     child: Text('중복확인'),
                   ),
                 ],
@@ -40,7 +47,9 @@ class SignUpView extends StatelessWidget {
                     style: INPUT_TEXTSTYLE,
                   ),
                   Expanded(
-                    child: CustomTextFormField(),
+                    child: CustomTextFormField(
+                      textEditingController: state.pwTxtCtr,
+                    ),
                   ),
                 ],
               ),
@@ -51,7 +60,9 @@ class SignUpView extends StatelessWidget {
                     style: INPUT_TEXTSTYLE,
                   ),
                   Expanded(
-                    child: CustomTextFormField(),
+                    child: CustomTextFormField(
+                      textEditingController: state.pwCheckTxtCtr,
+                    ),
                   ),
                 ],
               ),
@@ -62,7 +73,9 @@ class SignUpView extends StatelessWidget {
                     style: INPUT_TEXTSTYLE,
                   ),
                   Expanded(
-                    child: CustomTextFormField(),
+                    child: CustomTextFormField(
+                      textEditingController: state.nickNameTxtCtr,
+                    ),
                   ),
                 ],
               ),
@@ -73,7 +86,9 @@ class SignUpView extends StatelessWidget {
                     style: INPUT_TEXTSTYLE,
                   ),
                   Expanded(
-                    child: CustomTextFormField(),
+                    child: CustomTextFormField(
+                      textEditingController: state.ageTxtCtr,
+                    ),
                   ),
                 ],
               ),
@@ -84,7 +99,9 @@ class SignUpView extends StatelessWidget {
                     style: INPUT_TEXTSTYLE,
                   ),
                   Expanded(
-                    child: CustomTextFormField(),
+                    child: CustomTextFormField(
+                      textEditingController: state.weightTxtCtr,
+                    ),
                   ),
                 ],
               ),
