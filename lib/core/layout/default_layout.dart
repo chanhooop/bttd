@@ -27,13 +27,18 @@ class DefaultLayout extends StatelessWidget {
     final double heightWithoutAppBar =
         screenHeight - appBarHeight - statusBarHeight;
     return Scaffold(
-        appBar: AppBar(
-          title: Text(title),
-          leading: leading,
-          actions: actions,
-        ),
-        floatingActionButton: floatingActionButton,
-        drawer: isdrawer! ? DrawerWidget() : null,
-        body: SizedBox(height: heightWithoutAppBar, child: body));
+      appBar: AppBar(
+        title: Text(title),
+        leading: leading,
+        actions: actions,
+      ),
+      floatingActionButton: floatingActionButton,
+      drawer: isdrawer! ? DrawerWidget() : null,
+      body: Container(
+          width: MediaQuery.of(context).size.width,
+          height: heightWithoutAppBar,
+          // color: Colors.amberAccent,
+          child: body),
+    );
   }
 }

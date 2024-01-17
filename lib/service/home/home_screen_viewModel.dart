@@ -1,10 +1,8 @@
 import 'package:bttd/dataRepository/board_repository.dart';
 import 'package:bttd/dataSource/model/board_model.dart';
-import 'package:bttd/service/home/post_detail_view.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:go_router/go_router.dart';
+
 part 'home_screen_viewModel.freezed.dart';
 
 @freezed
@@ -31,7 +29,7 @@ class HomeScreenNotifier extends StateNotifier<HomeScreenViewModel> {
     print('HomeScreenViewModel : initData');
     try {
       BoardModelList _list = await _boardRepository.getBoardList();
-      return state = state.copyWith(list: _list);
+      return state = state.copyWith(list: _list, listDataError: false);
     } catch (e) {
       return state = state.copyWith(listDataError: true);
     }

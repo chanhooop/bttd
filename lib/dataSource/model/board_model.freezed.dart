@@ -169,6 +169,9 @@ mixin _$BoardModel {
   String? get user_id => throw _privateConstructorUsedError;
   String? get post_title => throw _privateConstructorUsedError;
   String? get post_context => throw _privateConstructorUsedError;
+  String? get away_id => throw _privateConstructorUsedError;
+  String? get score => throw _privateConstructorUsedError;
+  int? get comment_count => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -182,7 +185,13 @@ abstract class $BoardModelCopyWith<$Res> {
           BoardModel value, $Res Function(BoardModel) then) =
       _$BoardModelCopyWithImpl<$Res, BoardModel>;
   @useResult
-  $Res call({String? user_id, String? post_title, String? post_context});
+  $Res call(
+      {String? user_id,
+      String? post_title,
+      String? post_context,
+      String? away_id,
+      String? score,
+      int? comment_count});
 }
 
 /// @nodoc
@@ -201,6 +210,9 @@ class _$BoardModelCopyWithImpl<$Res, $Val extends BoardModel>
     Object? user_id = freezed,
     Object? post_title = freezed,
     Object? post_context = freezed,
+    Object? away_id = freezed,
+    Object? score = freezed,
+    Object? comment_count = freezed,
   }) {
     return _then(_value.copyWith(
       user_id: freezed == user_id
@@ -215,6 +227,18 @@ class _$BoardModelCopyWithImpl<$Res, $Val extends BoardModel>
           ? _value.post_context
           : post_context // ignore: cast_nullable_to_non_nullable
               as String?,
+      away_id: freezed == away_id
+          ? _value.away_id
+          : away_id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      score: freezed == score
+          ? _value.score
+          : score // ignore: cast_nullable_to_non_nullable
+              as String?,
+      comment_count: freezed == comment_count
+          ? _value.comment_count
+          : comment_count // ignore: cast_nullable_to_non_nullable
+              as int?,
     ) as $Val);
   }
 }
@@ -227,7 +251,13 @@ abstract class _$$BoardModelImplCopyWith<$Res>
       __$$BoardModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? user_id, String? post_title, String? post_context});
+  $Res call(
+      {String? user_id,
+      String? post_title,
+      String? post_context,
+      String? away_id,
+      String? score,
+      int? comment_count});
 }
 
 /// @nodoc
@@ -244,6 +274,9 @@ class __$$BoardModelImplCopyWithImpl<$Res>
     Object? user_id = freezed,
     Object? post_title = freezed,
     Object? post_context = freezed,
+    Object? away_id = freezed,
+    Object? score = freezed,
+    Object? comment_count = freezed,
   }) {
     return _then(_$BoardModelImpl(
       user_id: freezed == user_id
@@ -258,6 +291,18 @@ class __$$BoardModelImplCopyWithImpl<$Res>
           ? _value.post_context
           : post_context // ignore: cast_nullable_to_non_nullable
               as String?,
+      away_id: freezed == away_id
+          ? _value.away_id
+          : away_id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      score: freezed == score
+          ? _value.score
+          : score // ignore: cast_nullable_to_non_nullable
+              as String?,
+      comment_count: freezed == comment_count
+          ? _value.comment_count
+          : comment_count // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -265,7 +310,13 @@ class __$$BoardModelImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$BoardModelImpl implements _BoardModel {
-  _$BoardModelImpl({this.user_id, this.post_title, this.post_context});
+  _$BoardModelImpl(
+      {this.user_id,
+      this.post_title,
+      this.post_context,
+      this.away_id,
+      this.score,
+      this.comment_count});
 
   factory _$BoardModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$BoardModelImplFromJson(json);
@@ -276,10 +327,16 @@ class _$BoardModelImpl implements _BoardModel {
   final String? post_title;
   @override
   final String? post_context;
+  @override
+  final String? away_id;
+  @override
+  final String? score;
+  @override
+  final int? comment_count;
 
   @override
   String toString() {
-    return 'BoardModel(user_id: $user_id, post_title: $post_title, post_context: $post_context)';
+    return 'BoardModel(user_id: $user_id, post_title: $post_title, post_context: $post_context, away_id: $away_id, score: $score, comment_count: $comment_count)';
   }
 
   @override
@@ -291,13 +348,17 @@ class _$BoardModelImpl implements _BoardModel {
             (identical(other.post_title, post_title) ||
                 other.post_title == post_title) &&
             (identical(other.post_context, post_context) ||
-                other.post_context == post_context));
+                other.post_context == post_context) &&
+            (identical(other.away_id, away_id) || other.away_id == away_id) &&
+            (identical(other.score, score) || other.score == score) &&
+            (identical(other.comment_count, comment_count) ||
+                other.comment_count == comment_count));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, user_id, post_title, post_context);
+  int get hashCode => Object.hash(runtimeType, user_id, post_title,
+      post_context, away_id, score, comment_count);
 
   @JsonKey(ignore: true)
   @override
@@ -317,7 +378,10 @@ abstract class _BoardModel implements BoardModel {
   factory _BoardModel(
       {final String? user_id,
       final String? post_title,
-      final String? post_context}) = _$BoardModelImpl;
+      final String? post_context,
+      final String? away_id,
+      final String? score,
+      final int? comment_count}) = _$BoardModelImpl;
 
   factory _BoardModel.fromJson(Map<String, dynamic> json) =
       _$BoardModelImpl.fromJson;
@@ -328,6 +392,12 @@ abstract class _BoardModel implements BoardModel {
   String? get post_title;
   @override
   String? get post_context;
+  @override
+  String? get away_id;
+  @override
+  String? get score;
+  @override
+  int? get comment_count;
   @override
   @JsonKey(ignore: true)
   _$$BoardModelImplCopyWith<_$BoardModelImpl> get copyWith =>

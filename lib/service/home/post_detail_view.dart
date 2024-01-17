@@ -1,9 +1,11 @@
 import 'package:bttd/core/layout/default_layout.dart';
+import 'package:bttd/core/widget/custom_network_image_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class PostDetailView extends ConsumerWidget {
   static const routeName = 'PostDetailView';
+
   const PostDetailView({Key? key}) : super(key: key);
 
   @override
@@ -96,9 +98,13 @@ class PostDetailView extends ConsumerWidget {
           Row(
             children: [
               SizedBox(
-                  width: 100,
-                  height: 100,
-                  child: Image.asset('assets/images/profile_image.jpeg')),
+                width: 100,
+                height: 100,
+                child: CustomNetworkImageWidget(
+                  imgurl: '',
+                  assetImgPath: 'assets/images/profile_image.jpeg',
+                ),
+              ),
               Expanded(
                   child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 5),
