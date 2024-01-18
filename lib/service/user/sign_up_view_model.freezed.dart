@@ -25,8 +25,10 @@ mixin _$SignUpViewModel {
       throw _privateConstructorUsedError;
   TextEditingController? get ageTxtCtr => throw _privateConstructorUsedError;
   TextEditingController? get weightTxtCtr => throw _privateConstructorUsedError;
+  bool? get isPwChecked => throw _privateConstructorUsedError;
   bool? get isCheckedEmail => throw _privateConstructorUsedError;
   bool? get isAuthenticateEmail => throw _privateConstructorUsedError;
+  bool? get isAuthenticateEmailChecked => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SignUpViewModelCopyWith<SignUpViewModel> get copyWith =>
@@ -47,8 +49,10 @@ abstract class $SignUpViewModelCopyWith<$Res> {
       TextEditingController? nickNameTxtCtr,
       TextEditingController? ageTxtCtr,
       TextEditingController? weightTxtCtr,
+      bool? isPwChecked,
       bool? isCheckedEmail,
-      bool? isAuthenticateEmail});
+      bool? isAuthenticateEmail,
+      bool? isAuthenticateEmailChecked});
 
   $SignUpModelCopyWith<$Res>? get signUpModel;
 }
@@ -73,8 +77,10 @@ class _$SignUpViewModelCopyWithImpl<$Res, $Val extends SignUpViewModel>
     Object? nickNameTxtCtr = freezed,
     Object? ageTxtCtr = freezed,
     Object? weightTxtCtr = freezed,
+    Object? isPwChecked = freezed,
     Object? isCheckedEmail = freezed,
     Object? isAuthenticateEmail = freezed,
+    Object? isAuthenticateEmailChecked = freezed,
   }) {
     return _then(_value.copyWith(
       signUpModel: freezed == signUpModel
@@ -105,6 +111,10 @@ class _$SignUpViewModelCopyWithImpl<$Res, $Val extends SignUpViewModel>
           ? _value.weightTxtCtr
           : weightTxtCtr // ignore: cast_nullable_to_non_nullable
               as TextEditingController?,
+      isPwChecked: freezed == isPwChecked
+          ? _value.isPwChecked
+          : isPwChecked // ignore: cast_nullable_to_non_nullable
+              as bool?,
       isCheckedEmail: freezed == isCheckedEmail
           ? _value.isCheckedEmail
           : isCheckedEmail // ignore: cast_nullable_to_non_nullable
@@ -112,6 +122,10 @@ class _$SignUpViewModelCopyWithImpl<$Res, $Val extends SignUpViewModel>
       isAuthenticateEmail: freezed == isAuthenticateEmail
           ? _value.isAuthenticateEmail
           : isAuthenticateEmail // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      isAuthenticateEmailChecked: freezed == isAuthenticateEmailChecked
+          ? _value.isAuthenticateEmailChecked
+          : isAuthenticateEmailChecked // ignore: cast_nullable_to_non_nullable
               as bool?,
     ) as $Val);
   }
@@ -145,8 +159,10 @@ abstract class _$$SignUpViewModelImplCopyWith<$Res>
       TextEditingController? nickNameTxtCtr,
       TextEditingController? ageTxtCtr,
       TextEditingController? weightTxtCtr,
+      bool? isPwChecked,
       bool? isCheckedEmail,
-      bool? isAuthenticateEmail});
+      bool? isAuthenticateEmail,
+      bool? isAuthenticateEmailChecked});
 
   @override
   $SignUpModelCopyWith<$Res>? get signUpModel;
@@ -170,8 +186,10 @@ class __$$SignUpViewModelImplCopyWithImpl<$Res>
     Object? nickNameTxtCtr = freezed,
     Object? ageTxtCtr = freezed,
     Object? weightTxtCtr = freezed,
+    Object? isPwChecked = freezed,
     Object? isCheckedEmail = freezed,
     Object? isAuthenticateEmail = freezed,
+    Object? isAuthenticateEmailChecked = freezed,
   }) {
     return _then(_$SignUpViewModelImpl(
       signUpModel: freezed == signUpModel
@@ -202,6 +220,10 @@ class __$$SignUpViewModelImplCopyWithImpl<$Res>
           ? _value.weightTxtCtr
           : weightTxtCtr // ignore: cast_nullable_to_non_nullable
               as TextEditingController?,
+      isPwChecked: freezed == isPwChecked
+          ? _value.isPwChecked
+          : isPwChecked // ignore: cast_nullable_to_non_nullable
+              as bool?,
       isCheckedEmail: freezed == isCheckedEmail
           ? _value.isCheckedEmail
           : isCheckedEmail // ignore: cast_nullable_to_non_nullable
@@ -209,6 +231,10 @@ class __$$SignUpViewModelImplCopyWithImpl<$Res>
       isAuthenticateEmail: freezed == isAuthenticateEmail
           ? _value.isAuthenticateEmail
           : isAuthenticateEmail // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      isAuthenticateEmailChecked: freezed == isAuthenticateEmailChecked
+          ? _value.isAuthenticateEmailChecked
+          : isAuthenticateEmailChecked // ignore: cast_nullable_to_non_nullable
               as bool?,
     ));
   }
@@ -225,8 +251,10 @@ class _$SignUpViewModelImpl implements _SignUpViewModel {
       this.nickNameTxtCtr,
       this.ageTxtCtr,
       this.weightTxtCtr,
+      this.isPwChecked,
       this.isCheckedEmail,
-      this.isAuthenticateEmail});
+      this.isAuthenticateEmail,
+      this.isAuthenticateEmailChecked});
 
   @override
   final SignUpModel? signUpModel;
@@ -243,13 +271,17 @@ class _$SignUpViewModelImpl implements _SignUpViewModel {
   @override
   final TextEditingController? weightTxtCtr;
   @override
+  final bool? isPwChecked;
+  @override
   final bool? isCheckedEmail;
   @override
   final bool? isAuthenticateEmail;
+  @override
+  final bool? isAuthenticateEmailChecked;
 
   @override
   String toString() {
-    return 'SignUpViewModel(signUpModel: $signUpModel, emailTxtCtr: $emailTxtCtr, pwTxtCtr: $pwTxtCtr, pwCheckTxtCtr: $pwCheckTxtCtr, nickNameTxtCtr: $nickNameTxtCtr, ageTxtCtr: $ageTxtCtr, weightTxtCtr: $weightTxtCtr, isCheckedEmail: $isCheckedEmail, isAuthenticateEmail: $isAuthenticateEmail)';
+    return 'SignUpViewModel(signUpModel: $signUpModel, emailTxtCtr: $emailTxtCtr, pwTxtCtr: $pwTxtCtr, pwCheckTxtCtr: $pwCheckTxtCtr, nickNameTxtCtr: $nickNameTxtCtr, ageTxtCtr: $ageTxtCtr, weightTxtCtr: $weightTxtCtr, isPwChecked: $isPwChecked, isCheckedEmail: $isCheckedEmail, isAuthenticateEmail: $isAuthenticateEmail, isAuthenticateEmailChecked: $isAuthenticateEmailChecked)';
   }
 
   @override
@@ -271,10 +303,16 @@ class _$SignUpViewModelImpl implements _SignUpViewModel {
                 other.ageTxtCtr == ageTxtCtr) &&
             (identical(other.weightTxtCtr, weightTxtCtr) ||
                 other.weightTxtCtr == weightTxtCtr) &&
+            (identical(other.isPwChecked, isPwChecked) ||
+                other.isPwChecked == isPwChecked) &&
             (identical(other.isCheckedEmail, isCheckedEmail) ||
                 other.isCheckedEmail == isCheckedEmail) &&
             (identical(other.isAuthenticateEmail, isAuthenticateEmail) ||
-                other.isAuthenticateEmail == isAuthenticateEmail));
+                other.isAuthenticateEmail == isAuthenticateEmail) &&
+            (identical(other.isAuthenticateEmailChecked,
+                    isAuthenticateEmailChecked) ||
+                other.isAuthenticateEmailChecked ==
+                    isAuthenticateEmailChecked));
   }
 
   @override
@@ -287,8 +325,10 @@ class _$SignUpViewModelImpl implements _SignUpViewModel {
       nickNameTxtCtr,
       ageTxtCtr,
       weightTxtCtr,
+      isPwChecked,
       isCheckedEmail,
-      isAuthenticateEmail);
+      isAuthenticateEmail,
+      isAuthenticateEmailChecked);
 
   @JsonKey(ignore: true)
   @override
@@ -307,8 +347,10 @@ abstract class _SignUpViewModel implements SignUpViewModel {
       final TextEditingController? nickNameTxtCtr,
       final TextEditingController? ageTxtCtr,
       final TextEditingController? weightTxtCtr,
+      final bool? isPwChecked,
       final bool? isCheckedEmail,
-      final bool? isAuthenticateEmail}) = _$SignUpViewModelImpl;
+      final bool? isAuthenticateEmail,
+      final bool? isAuthenticateEmailChecked}) = _$SignUpViewModelImpl;
 
   @override
   SignUpModel? get signUpModel;
@@ -325,9 +367,13 @@ abstract class _SignUpViewModel implements SignUpViewModel {
   @override
   TextEditingController? get weightTxtCtr;
   @override
+  bool? get isPwChecked;
+  @override
   bool? get isCheckedEmail;
   @override
   bool? get isAuthenticateEmail;
+  @override
+  bool? get isAuthenticateEmailChecked;
   @override
   @JsonKey(ignore: true)
   _$$SignUpViewModelImplCopyWith<_$SignUpViewModelImpl> get copyWith =>

@@ -17,8 +17,10 @@ class SignUpViewModel with _$SignUpViewModel {
     TextEditingController? nickNameTxtCtr,
     TextEditingController? ageTxtCtr,
     TextEditingController? weightTxtCtr,
+    bool? isPwChecked,
     bool? isCheckedEmail,
     bool? isAuthenticateEmail,
+    bool? isAuthenticateEmailChecked,
 
   }) = _SignUpViewModel;
 
@@ -42,8 +44,9 @@ class SignUpViewNotifier extends StateNotifier<SignUpViewModel> {
       nickNameTxtCtr: TextEditingController(),
       ageTxtCtr: TextEditingController(),
       weightTxtCtr: TextEditingController(),
-      isAuthenticateEmail:false,
       isCheckedEmail:false,
+      isAuthenticateEmail:false,
+      isAuthenticateEmailChecked:false,
     );
   }
 

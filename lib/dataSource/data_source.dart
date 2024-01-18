@@ -16,6 +16,12 @@ class DataSource {
     return ResponseModel.fromJson(response.data);
   }
 
+  /// 이메일 인증메일 발송하기
+  Future<ResponseModel> getEmailAuthenticateCheck(String email) async{
+    Response response = await dio.get('/api/userEmailConfirm', queryParameters: {"user_id":email});
+    return ResponseModel.fromJson(response.data);
+  }
+
   /// 회원가입하기
   Future<ResponseModel> postSignUp(SignUpModel signUpModel) async{
     Response response = await dio.post('/api/user', data: signUpModel.toJson());
