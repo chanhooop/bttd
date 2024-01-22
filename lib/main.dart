@@ -1,9 +1,17 @@
 import 'package:bttd/config/route/router.dart';
 import 'package:bttd/core/provider_observer.dart';
+import 'package:bttd/dataRepository/user_secure_strage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  String isLogined =await UserSecureStorage().readLoginData(key: 'isLogined') ?? '';
+  String accessToken =await UserSecureStorage().readLoginData(key: 'accessToken') ?? '';
+  String refreshToken =await UserSecureStorage().readLoginData(key: 'refreshToken') ?? '';
+  print('isLoggined : ${isLogined}');
+  print('isLoggined : ${accessToken}');
+  print('isLoggined : ${refreshToken}');
   runApp(const MyApp());
 }
 
@@ -17,6 +25,7 @@ class MyApp extends StatelessWidget {
         Logger(),
       ],
       child: MaterialApp.router(
+        debugShowCheckedModeBanner: false,
         title: 'BTTD',
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),

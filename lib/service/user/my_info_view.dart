@@ -1,14 +1,22 @@
-import 'package:bttd/core/layout/default_layout.dart';
-import 'package:bttd/core/widget/custom_text_form_field.dart';
-import 'package:flutter/material.dart';
+import 'dart:io';
 
-class MyInfoView extends StatelessWidget {
+import 'package:bttd/core/layout/default_layout.dart';
+import 'package:bttd/core/widget/custom_network_image_widget.dart';
+import 'package:bttd/core/widget/custom_text_form_field.dart';
+import 'package:bttd/service/user/my_info_view_model.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:image_picker/image_picker.dart';
+
+class MyInfoView extends ConsumerWidget {
   static String routeName = 'MyInfoView';
 
   const MyInfoView({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    MyInfoViewModel state = ref.watch(MyInfoViewProvider);
+    var imagePicker = ImagePicker();
     return DefaultLayout(
       title: '내 정보',
       body: SingleChildScrollView(
@@ -24,11 +32,19 @@ class MyInfoView extends StatelessWidget {
                   Container(
                     width: 200,
                     height: 200,
-                    color: Colors.amber,
+                    child:
+                    state.selectedImage == null ? CustomNetworkImageWidget(
+                      // Todo : 저장되어 있는 유저 이메일
+                      imgurl: 'https://t1.daumcdn.net/thumb/R1280x0/?fname=http://t1.daumcdn.net/brunch/service/user/4As9/image/l2phoXSv_msu7rPq6zsGVSpigF0',
+                      assetImgPath: 'assets/images/profile_image.jpeg',
+                    ) : Image(image: FileImage(File(state.selectedImage!.path)))
                   ),
                   SizedBox(height: 10),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () async{
+                        var image = await imagePicker.pickImage(source: ImageSource.gallery);
+                      ref.read(MyInfoViewProvider.notifier).changeImage(image);
+                    },
                     child: Text('프로필사진 변경'),
                   ),
                   _infoRow(title: '이메일', onPressed: () {}),

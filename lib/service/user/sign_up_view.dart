@@ -32,6 +32,7 @@ class SignUpView extends ConsumerWidget {
                     textEditingController: state.emailTxtCtr,
                     ),
                   ),
+                  SizedBox(width: 10),
                   ElevatedButton(
                     onPressed: () {
                       ref.read(SignUpViewProvider.notifier).emailDoubleCheck();
