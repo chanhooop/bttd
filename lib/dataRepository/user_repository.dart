@@ -1,4 +1,3 @@
-import 'dart:convert';
 
 import 'package:bttd/core/utill.dart';
 import 'package:bttd/dataRepository/user_secure_strage.dart';
@@ -7,7 +6,6 @@ import 'package:bttd/dataSource/model/response_model.dart';
 import 'package:bttd/dataSource/model/sign_up_model.dart';
 import 'package:bttd/dataSource/model/user_model.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 
 class UserRepository {
   final DataSource _dataSource = DataSource();
@@ -46,6 +44,19 @@ class UserRepository {
     ResponseModel responseModel = await _dataSource.getMyInfo(email);
     UserModel userModel = UserModel.fromJson(responseModel.data!);
     return userModel;
+  }
+
+  /// 자동로그인
+  Future<bool> autoLogin() async{
+    String? isLogined = await UserSecureStorage().readLoginData(key: 'isLogined');
+    if(isLogined == 'true'){
+      print('auto Login true');
+      // todo : 자동로그인 로직 추가
+      return true;
+    } else{
+      print('auto Login false');
+    return false;
+    }
   }
 
   /// 이메일 중복확인
@@ -107,7 +118,7 @@ class UserRepository {
     return _isSignUp;
   }
 
-  /// 프로필 이미지 바꾸기
+
   /// 사진 업로드 하기
   Future<bool> postImageUpload(String imagePath, String userId) async {
     print('로컬 postImageUpload');

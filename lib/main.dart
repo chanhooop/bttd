@@ -1,5 +1,6 @@
 import 'package:bttd/config/route/router.dart';
 import 'package:bttd/core/provider_observer.dart';
+import 'package:bttd/dataRepository/user_repository.dart';
 import 'package:bttd/dataRepository/user_secure_strage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -12,6 +13,7 @@ void main() async{
   print('isLoggined : ${isLogined}');
   print('isLoggined : ${accessToken}');
   print('isLoggined : ${refreshToken}');
+  UserRepository().autoLogin();
   runApp(const MyApp());
 }
 

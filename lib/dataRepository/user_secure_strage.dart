@@ -22,7 +22,8 @@ class UserSecureStorage {
 
   /// 로그인 상태, 엑세스토큰, 리프레시토큰 가져오기
   readLoginData({required String key}) async {
-    return await storage.read(key: key);
+     String? returnStr = await storage.read(key: key);
+    return returnStr;
   }
 
   /// 로그인 상태, 엑세스토큰, 리프레시토큰 삭제
