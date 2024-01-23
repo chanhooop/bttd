@@ -9,7 +9,7 @@ part of 'response_model.dart';
 _$ResponseModelImpl _$$ResponseModelImplFromJson(Map<String, dynamic> json) =>
     _$ResponseModelImpl(
       status: json['status'] as String?,
-      data: json['data'],
+      data: json['data'] as Map<String, dynamic>?,
       message: json['message'] as String?,
     );
 

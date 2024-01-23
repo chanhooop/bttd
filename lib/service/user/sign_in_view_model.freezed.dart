@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$SignInViewModel {
   UserModel? get userModel => throw _privateConstructorUsedError;
+  bool? get isLogined => throw _privateConstructorUsedError;
   TextEditingController? get emailTxtCtr => throw _privateConstructorUsedError;
   TextEditingController? get pwTxtCtr => throw _privateConstructorUsedError;
 
@@ -33,6 +34,7 @@ abstract class $SignInViewModelCopyWith<$Res> {
   @useResult
   $Res call(
       {UserModel? userModel,
+      bool? isLogined,
       TextEditingController? emailTxtCtr,
       TextEditingController? pwTxtCtr});
 
@@ -53,6 +55,7 @@ class _$SignInViewModelCopyWithImpl<$Res, $Val extends SignInViewModel>
   @override
   $Res call({
     Object? userModel = freezed,
+    Object? isLogined = freezed,
     Object? emailTxtCtr = freezed,
     Object? pwTxtCtr = freezed,
   }) {
@@ -61,6 +64,10 @@ class _$SignInViewModelCopyWithImpl<$Res, $Val extends SignInViewModel>
           ? _value.userModel
           : userModel // ignore: cast_nullable_to_non_nullable
               as UserModel?,
+      isLogined: freezed == isLogined
+          ? _value.isLogined
+          : isLogined // ignore: cast_nullable_to_non_nullable
+              as bool?,
       emailTxtCtr: freezed == emailTxtCtr
           ? _value.emailTxtCtr
           : emailTxtCtr // ignore: cast_nullable_to_non_nullable
@@ -95,6 +102,7 @@ abstract class _$$SignInViewModelImplCopyWith<$Res>
   @useResult
   $Res call(
       {UserModel? userModel,
+      bool? isLogined,
       TextEditingController? emailTxtCtr,
       TextEditingController? pwTxtCtr});
 
@@ -114,6 +122,7 @@ class __$$SignInViewModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? userModel = freezed,
+    Object? isLogined = freezed,
     Object? emailTxtCtr = freezed,
     Object? pwTxtCtr = freezed,
   }) {
@@ -122,6 +131,10 @@ class __$$SignInViewModelImplCopyWithImpl<$Res>
           ? _value.userModel
           : userModel // ignore: cast_nullable_to_non_nullable
               as UserModel?,
+      isLogined: freezed == isLogined
+          ? _value.isLogined
+          : isLogined // ignore: cast_nullable_to_non_nullable
+              as bool?,
       emailTxtCtr: freezed == emailTxtCtr
           ? _value.emailTxtCtr
           : emailTxtCtr // ignore: cast_nullable_to_non_nullable
@@ -137,10 +150,13 @@ class __$$SignInViewModelImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SignInViewModelImpl implements _SignInViewModel {
-  _$SignInViewModelImpl({this.userModel, this.emailTxtCtr, this.pwTxtCtr});
+  _$SignInViewModelImpl(
+      {this.userModel, this.isLogined, this.emailTxtCtr, this.pwTxtCtr});
 
   @override
   final UserModel? userModel;
+  @override
+  final bool? isLogined;
   @override
   final TextEditingController? emailTxtCtr;
   @override
@@ -148,7 +164,7 @@ class _$SignInViewModelImpl implements _SignInViewModel {
 
   @override
   String toString() {
-    return 'SignInViewModel(userModel: $userModel, emailTxtCtr: $emailTxtCtr, pwTxtCtr: $pwTxtCtr)';
+    return 'SignInViewModel(userModel: $userModel, isLogined: $isLogined, emailTxtCtr: $emailTxtCtr, pwTxtCtr: $pwTxtCtr)';
   }
 
   @override
@@ -158,6 +174,8 @@ class _$SignInViewModelImpl implements _SignInViewModel {
             other is _$SignInViewModelImpl &&
             (identical(other.userModel, userModel) ||
                 other.userModel == userModel) &&
+            (identical(other.isLogined, isLogined) ||
+                other.isLogined == isLogined) &&
             (identical(other.emailTxtCtr, emailTxtCtr) ||
                 other.emailTxtCtr == emailTxtCtr) &&
             (identical(other.pwTxtCtr, pwTxtCtr) ||
@@ -166,7 +184,7 @@ class _$SignInViewModelImpl implements _SignInViewModel {
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, userModel, emailTxtCtr, pwTxtCtr);
+      Object.hash(runtimeType, userModel, isLogined, emailTxtCtr, pwTxtCtr);
 
   @JsonKey(ignore: true)
   @override
@@ -179,11 +197,14 @@ class _$SignInViewModelImpl implements _SignInViewModel {
 abstract class _SignInViewModel implements SignInViewModel {
   factory _SignInViewModel(
       {final UserModel? userModel,
+      final bool? isLogined,
       final TextEditingController? emailTxtCtr,
       final TextEditingController? pwTxtCtr}) = _$SignInViewModelImpl;
 
   @override
   UserModel? get userModel;
+  @override
+  bool? get isLogined;
   @override
   TextEditingController? get emailTxtCtr;
   @override

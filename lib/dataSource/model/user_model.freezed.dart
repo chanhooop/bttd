@@ -23,7 +23,9 @@ mixin _$UserModel {
   String? get user_id => throw _privateConstructorUsedError;
   String? get user_name => throw _privateConstructorUsedError;
   String? get user_weight => throw _privateConstructorUsedError;
-  String? get user_password => throw _privateConstructorUsedError;
+  int? get user_win => throw _privateConstructorUsedError;
+  int? get user_lose => throw _privateConstructorUsedError;
+  String? get photo => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -40,7 +42,9 @@ abstract class $UserModelCopyWith<$Res> {
       {String? user_id,
       String? user_name,
       String? user_weight,
-      String? user_password});
+      int? user_win,
+      int? user_lose,
+      String? photo});
 }
 
 /// @nodoc
@@ -59,7 +63,9 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
     Object? user_id = freezed,
     Object? user_name = freezed,
     Object? user_weight = freezed,
-    Object? user_password = freezed,
+    Object? user_win = freezed,
+    Object? user_lose = freezed,
+    Object? photo = freezed,
   }) {
     return _then(_value.copyWith(
       user_id: freezed == user_id
@@ -74,9 +80,17 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
           ? _value.user_weight
           : user_weight // ignore: cast_nullable_to_non_nullable
               as String?,
-      user_password: freezed == user_password
-          ? _value.user_password
-          : user_password // ignore: cast_nullable_to_non_nullable
+      user_win: freezed == user_win
+          ? _value.user_win
+          : user_win // ignore: cast_nullable_to_non_nullable
+              as int?,
+      user_lose: freezed == user_lose
+          ? _value.user_lose
+          : user_lose // ignore: cast_nullable_to_non_nullable
+              as int?,
+      photo: freezed == photo
+          ? _value.photo
+          : photo // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
   }
@@ -94,7 +108,9 @@ abstract class _$$UserModelImplCopyWith<$Res>
       {String? user_id,
       String? user_name,
       String? user_weight,
-      String? user_password});
+      int? user_win,
+      int? user_lose,
+      String? photo});
 }
 
 /// @nodoc
@@ -111,7 +127,9 @@ class __$$UserModelImplCopyWithImpl<$Res>
     Object? user_id = freezed,
     Object? user_name = freezed,
     Object? user_weight = freezed,
-    Object? user_password = freezed,
+    Object? user_win = freezed,
+    Object? user_lose = freezed,
+    Object? photo = freezed,
   }) {
     return _then(_$UserModelImpl(
       user_id: freezed == user_id
@@ -126,9 +144,17 @@ class __$$UserModelImplCopyWithImpl<$Res>
           ? _value.user_weight
           : user_weight // ignore: cast_nullable_to_non_nullable
               as String?,
-      user_password: freezed == user_password
-          ? _value.user_password
-          : user_password // ignore: cast_nullable_to_non_nullable
+      user_win: freezed == user_win
+          ? _value.user_win
+          : user_win // ignore: cast_nullable_to_non_nullable
+              as int?,
+      user_lose: freezed == user_lose
+          ? _value.user_lose
+          : user_lose // ignore: cast_nullable_to_non_nullable
+              as int?,
+      photo: freezed == photo
+          ? _value.photo
+          : photo // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -138,7 +164,12 @@ class __$$UserModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$UserModelImpl implements _UserModel {
   _$UserModelImpl(
-      {this.user_id, this.user_name, this.user_weight, this.user_password});
+      {this.user_id,
+      this.user_name,
+      this.user_weight,
+      this.user_win,
+      this.user_lose,
+      this.photo});
 
   factory _$UserModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserModelImplFromJson(json);
@@ -150,11 +181,15 @@ class _$UserModelImpl implements _UserModel {
   @override
   final String? user_weight;
   @override
-  final String? user_password;
+  final int? user_win;
+  @override
+  final int? user_lose;
+  @override
+  final String? photo;
 
   @override
   String toString() {
-    return 'UserModel(user_id: $user_id, user_name: $user_name, user_weight: $user_weight, user_password: $user_password)';
+    return 'UserModel(user_id: $user_id, user_name: $user_name, user_weight: $user_weight, user_win: $user_win, user_lose: $user_lose, photo: $photo)';
   }
 
   @override
@@ -167,14 +202,17 @@ class _$UserModelImpl implements _UserModel {
                 other.user_name == user_name) &&
             (identical(other.user_weight, user_weight) ||
                 other.user_weight == user_weight) &&
-            (identical(other.user_password, user_password) ||
-                other.user_password == user_password));
+            (identical(other.user_win, user_win) ||
+                other.user_win == user_win) &&
+            (identical(other.user_lose, user_lose) ||
+                other.user_lose == user_lose) &&
+            (identical(other.photo, photo) || other.photo == photo));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, user_id, user_name, user_weight, user_password);
+  int get hashCode => Object.hash(
+      runtimeType, user_id, user_name, user_weight, user_win, user_lose, photo);
 
   @JsonKey(ignore: true)
   @override
@@ -195,7 +233,9 @@ abstract class _UserModel implements UserModel {
       {final String? user_id,
       final String? user_name,
       final String? user_weight,
-      final String? user_password}) = _$UserModelImpl;
+      final int? user_win,
+      final int? user_lose,
+      final String? photo}) = _$UserModelImpl;
 
   factory _UserModel.fromJson(Map<String, dynamic> json) =
       _$UserModelImpl.fromJson;
@@ -207,7 +247,11 @@ abstract class _UserModel implements UserModel {
   @override
   String? get user_weight;
   @override
-  String? get user_password;
+  int? get user_win;
+  @override
+  int? get user_lose;
+  @override
+  String? get photo;
   @override
   @JsonKey(ignore: true)
   _$$UserModelImplCopyWith<_$UserModelImpl> get copyWith =>

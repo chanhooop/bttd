@@ -21,7 +21,7 @@ ResponseModel _$ResponseModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$ResponseModel {
   String? get status => throw _privateConstructorUsedError;
-  Object? get data => throw _privateConstructorUsedError;
+  Map<String, dynamic>? get data => throw _privateConstructorUsedError;
   String? get message => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -36,7 +36,7 @@ abstract class $ResponseModelCopyWith<$Res> {
           ResponseModel value, $Res Function(ResponseModel) then) =
       _$ResponseModelCopyWithImpl<$Res, ResponseModel>;
   @useResult
-  $Res call({String? status, Object? data, String? message});
+  $Res call({String? status, Map<String, dynamic>? data, String? message});
 }
 
 /// @nodoc
@@ -61,7 +61,10 @@ class _$ResponseModelCopyWithImpl<$Res, $Val extends ResponseModel>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String?,
-      data: freezed == data ? _value.data : data,
+      data: freezed == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
       message: freezed == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -78,7 +81,7 @@ abstract class _$$ResponseModelImplCopyWith<$Res>
       __$$ResponseModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? status, Object? data, String? message});
+  $Res call({String? status, Map<String, dynamic>? data, String? message});
 }
 
 /// @nodoc
@@ -101,7 +104,10 @@ class __$$ResponseModelImplCopyWithImpl<$Res>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String?,
-      data: freezed == data ? _value.data : data,
+      data: freezed == data
+          ? _value._data
+          : data // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
       message: freezed == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -113,15 +119,25 @@ class __$$ResponseModelImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$ResponseModelImpl implements _ResponseModel {
-  _$ResponseModelImpl({this.status, this.data, this.message});
+  _$ResponseModelImpl(
+      {this.status, final Map<String, dynamic>? data, this.message})
+      : _data = data;
 
   factory _$ResponseModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$ResponseModelImplFromJson(json);
 
   @override
   final String? status;
+  final Map<String, dynamic>? _data;
   @override
-  final Object? data;
+  Map<String, dynamic>? get data {
+    final value = _data;
+    if (value == null) return null;
+    if (_data is EqualUnmodifiableMapView) return _data;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(value);
+  }
+
   @override
   final String? message;
 
@@ -136,14 +152,14 @@ class _$ResponseModelImpl implements _ResponseModel {
         (other.runtimeType == runtimeType &&
             other is _$ResponseModelImpl &&
             (identical(other.status, status) || other.status == status) &&
-            const DeepCollectionEquality().equals(other.data, data) &&
+            const DeepCollectionEquality().equals(other._data, _data) &&
             (identical(other.message, message) || other.message == message));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, status, const DeepCollectionEquality().hash(data), message);
+      runtimeType, status, const DeepCollectionEquality().hash(_data), message);
 
   @JsonKey(ignore: true)
   @override
@@ -162,7 +178,7 @@ class _$ResponseModelImpl implements _ResponseModel {
 abstract class _ResponseModel implements ResponseModel {
   factory _ResponseModel(
       {final String? status,
-      final Object? data,
+      final Map<String, dynamic>? data,
       final String? message}) = _$ResponseModelImpl;
 
   factory _ResponseModel.fromJson(Map<String, dynamic> json) =
@@ -171,7 +187,7 @@ abstract class _ResponseModel implements ResponseModel {
   @override
   String? get status;
   @override
-  Object? get data;
+  Map<String, dynamic>? get data;
   @override
   String? get message;
   @override

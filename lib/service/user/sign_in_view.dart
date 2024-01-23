@@ -13,7 +13,7 @@ class SignInView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final SignInViewModel state = ref.watch(SignInViewProvider);
     return GestureDetector(
-      onTap: (){
+      onTap: () {
         FocusScope.of(context).unfocus();
       },
       child: DefaultLayout(
@@ -25,16 +25,24 @@ class SignInView extends ConsumerWidget {
             children: [
               Row(
                 children: [
-                  Text('이메일 : ', style: INPUT_TEXTSTYLE,),
-                  Expanded(child: CustomTextFormField(
+                  Text(
+                    '이메일 : ',
+                    style: INPUT_TEXTSTYLE,
+                  ),
+                  Expanded(
+                      child: CustomTextFormField(
                     textEditingController: state.emailTxtCtr,
                   )),
                 ],
               ),
               Row(
                 children: [
-                  Text('비밀번호 : ', style: INPUT_TEXTSTYLE,),
-                  Expanded(child: CustomTextFormField(
+                  Text(
+                    '비밀번호 : ',
+                    style: INPUT_TEXTSTYLE,
+                  ),
+                  Expanded(
+                      child: CustomTextFormField(
                     textEditingController: state.pwTxtCtr,
                   )),
                 ],
@@ -46,7 +54,11 @@ class SignInView extends ConsumerWidget {
                   },
                   child: Text('로그인'),
                 ),
-              )
+              ),
+              Text(state.isLogined.toString()),
+              if (state.isLogined!) ...[
+                Text(state.userModel!.user_id!.toString()),
+              ]
             ],
           ),
         ),

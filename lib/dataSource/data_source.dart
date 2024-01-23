@@ -1,12 +1,11 @@
 import 'package:bttd/core/dio.dart';
+import 'package:bttd/dataRepository/user_secure_strage.dart';
 import 'package:bttd/dataSource/model/board_model.dart';
 import 'package:bttd/dataSource/model/response_model.dart';
 import 'package:bttd/dataSource/model/sign_up_model.dart';
 import 'package:dio/dio.dart';
 
-
 class DataSource {
-
   /// 이메일 중복확인
   Future<ResponseModel> postEmailCheck(String email) async {
     Response response =
@@ -75,6 +74,23 @@ class DataSource {
     print('${pw}');
     Response response = await dio
         .post('/api/login', data: {'user_id': email, 'user_password': pw});
+    ResponseModel responseModel = ResponseModel.fromJson(response.data);
+    return responseModel;
+  }
+
+  /// 내 정보 가져오기
+  Future<ResponseModel> getMyInfo(String email) async {
+    Map<String, dynamic> tokenData = await UserSecureStorage().getHeaderToken();
+    Response response = await dio.get('/api/userDetails?user_id=${email}',
+        options: Options(headers: tokenData));
+    ResponseModel responseModel = ResponseModel.fromJson(response.data);
+    return responseModel;
+  }
+
+  /// 토큰 유효 검사
+  Future<ResponseModel> postTokenCheck(String token) async {
+    Response response =
+        await dio.get('/api/tokenEnable', data: {'token': token});
     ResponseModel responseModel = ResponseModel.fromJson(response.data);
     return responseModel;
   }

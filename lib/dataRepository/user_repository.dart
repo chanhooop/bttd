@@ -1,14 +1,16 @@
+import 'dart:convert';
 
 import 'package:bttd/core/utill.dart';
 import 'package:bttd/dataRepository/user_secure_strage.dart';
 import 'package:bttd/dataSource/data_source.dart';
 import 'package:bttd/dataSource/model/response_model.dart';
 import 'package:bttd/dataSource/model/sign_up_model.dart';
+import 'package:bttd/dataSource/model/user_model.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
 class UserRepository {
   final DataSource _dataSource = DataSource();
-  bool _isAutoLogined = false;
   bool _isEmailDoubleCheck = false; // 이메일 중복 확인
   bool _isEmailAuthenticateCheck = false; // 이메일 인증 발송 확인
   bool _isSignUp = false;
@@ -16,7 +18,7 @@ class UserRepository {
   /// 로그인 하기
   Future<bool> postSignIn(String email, String pw) async {
     ResponseModel responseModel = await _dataSource.postSignIn(email, pw);
-    if(responseModel.status == "true"){
+    if (responseModel.status == "true") {
       Map<String, dynamic> json;
       print('로그인 성공');
       json = responseModel.data as Map<String, dynamic>;
@@ -24,7 +26,11 @@ class UserRepository {
       String accessToken = json['accessToken'];
       String refreshToken = json['refreshToken'];
       // 토큰 저장 로직
-      UserSecureStorage().writeLoginData(isLogined: isLogined, accessToken: accessToken, refreshToken: refreshToken);
+      await UserSecureStorage().writeLoginData(
+          isLogined: isLogined,
+          userId: email,
+          accessToken: accessToken,
+          refreshToken: refreshToken);
       return true;
     } else {
       print('로그인 실패');
@@ -35,9 +41,12 @@ class UserRepository {
     }
   }
 
-  /// 자동로그인 로직
-
   /// 내정보 가져오기 로직
+  Future<UserModel> getMyInfo(String email) async {
+    ResponseModel responseModel = await _dataSource.getMyInfo(email);
+    UserModel userModel = UserModel.fromJson(responseModel.data!);
+    return userModel;
+  }
 
   /// 이메일 중복확인
   Future<bool> postEmailCheck(String email) async {
@@ -102,23 +111,21 @@ class UserRepository {
   /// 사진 업로드 하기
   Future<bool> postImageUpload(String imagePath, String userId) async {
     print('로컬 postImageUpload');
-    try{
+    try {
       Map<String, dynamic> form = {
         'file': MultipartFile.fromFileSync(imagePath),
         'user_id': userId,
       };
-    print('로컬 postImageUpload 2 ');
+      print('로컬 postImageUpload 2 ');
 
       var formData = FormData.fromMap(form);
-    print('로컬 postImageUpload 3 ');
+      print('로컬 postImageUpload 3 ');
       ResponseModel responseModel = await _dataSource.postImageUpload(formData);
       print('postImageUpload : ${responseModel.message} ');
       return true;
-    }catch(e){
+    } catch (e) {
       print('postImageUpload Error : ${e}');
       return false;
     }
   }
-
-
 }
