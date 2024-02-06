@@ -1,17 +1,22 @@
 import 'package:bttd/core/widget/custom_network_image_widget.dart';
+import 'package:bttd/dataSource/model/user_model.dart';
 import 'package:bttd/service/game/confirm_game_screen.dart';
 import 'package:bttd/service/home/matching_screen.dart';
 import 'package:bttd/service/user/my_info_view.dart';
 import 'package:bttd/service/user/sign_in_view.dart';
+import 'package:bttd/service/user/sign_in_view_model.dart';
 import 'package:bttd/service/user/sign_up_view.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class DrawerWidget extends StatelessWidget {
+class DrawerWidget extends ConsumerWidget {
   const DrawerWidget({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    SignInViewModel signInViewModel = ref.watch(SignInViewProvider);
+    UserModel userModel = signInViewModel.userModel ?? UserModel();
     return SafeArea(
       child: Drawer(
         backgroundColor: Colors.white,
@@ -25,20 +30,24 @@ class DrawerWidget extends StatelessWidget {
                     width: 100,
                     height: 100,
                     child: CustomNetworkImageWidget(
-                      imgurl: '',
+                      imgurl: userModel.photo ?? '',
                       assetImgPath: 'assets/images/profile_image.jpeg',
                     ),
                   ),
                   Expanded(
-                      child: Center(
-                          child: Text(
-                    '닉네임 님!',
-                    style: TextStyle(fontSize: 20),
-                  ))),
+                    child: Center(
+                        child: signInViewModel.isLogined!
+                            ? Text(
+                                "${userModel.user_name ?? '이름없음'}님 환영합니다!",
+                                style: TextStyle(fontSize: 20),
+                                maxLines: null,
+                              )
+                            : Text('로그인 후 이용해주세요!')),
+                  ),
                 ],
               ),
               SizedBox(height: 20),
-              GestureDetector(
+              if(signInViewModel.isLogined!) GestureDetector(
                 onTap: () {
                   Scaffold.of(context).closeDrawer();
                   Future.delayed(Duration(milliseconds: 240)).then((value) {
@@ -62,7 +71,7 @@ class DrawerWidget extends StatelessWidget {
                   ),
                 ),
               ),
-              GestureDetector(
+              if(signInViewModel.isLogined!) GestureDetector(
                 onTap: () {
                   Scaffold.of(context).closeDrawer();
                   Future.delayed(Duration(milliseconds: 240)).then(
@@ -85,7 +94,7 @@ class DrawerWidget extends StatelessWidget {
                   ),
                 ),
               ),
-              GestureDetector(
+              if(signInViewModel.isLogined!) GestureDetector(
                 onTap: () {
                   Scaffold.of(context).closeDrawer();
                   Future.delayed(Duration(milliseconds: 240)).then((value) {
@@ -109,7 +118,7 @@ class DrawerWidget extends StatelessWidget {
                   ),
                 ),
               ),
-              GestureDetector(
+              if(!signInViewModel.isLogined!) GestureDetector(
                 onTap: () {
                   Scaffold.of(context).closeDrawer();
                   Future.delayed(Duration(milliseconds: 240)).then((value) {
@@ -133,7 +142,7 @@ class DrawerWidget extends StatelessWidget {
                   ),
                 ),
               ),
-              GestureDetector(
+              if(!signInViewModel.isLogined!) GestureDetector(
                 onTap: () {
                   Scaffold.of(context).closeDrawer();
                   Future.delayed(Duration(milliseconds: 240)).then((value) {
@@ -157,7 +166,7 @@ class DrawerWidget extends StatelessWidget {
                   ),
                 ),
               ),
-              Expanded(
+              if(signInViewModel.isLogined!) Expanded(
                   child: Align(
                 alignment: Alignment.bottomRight,
                 child: Padding(

@@ -1,9 +1,11 @@
 import 'package:bttd/config/theme/text_style.dart';
 import 'package:bttd/core/layout/default_layout.dart';
 import 'package:bttd/core/widget/custom_text_form_field.dart';
+import 'package:bttd/service/home/home_screen.dart';
 import 'package:bttd/service/user/sign_in_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 class SignInView extends ConsumerWidget {
   static String routeName = 'SignInScreen';
@@ -12,6 +14,7 @@ class SignInView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final SignInViewModel state = ref.watch(SignInViewProvider);
+
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -50,7 +53,11 @@ class SignInView extends ConsumerWidget {
               Center(
                 child: ElevatedButton(
                   onPressed: () {
-                    ref.read(SignInViewProvider.notifier).signIn();
+                    ref.read(SignInViewProvider.notifier).signIn().then((isLogined) {
+                      if(isLogined){
+                        context.goNamed(HomeScreen.routeName);
+                      }
+                    });
                   },
                   child: Text('로그인'),
                 ),

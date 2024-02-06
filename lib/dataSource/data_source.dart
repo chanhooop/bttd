@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bttd/core/dio.dart';
 import 'package:bttd/dataRepository/user_secure_strage.dart';
 import 'package:bttd/dataSource/model/board_model.dart';
@@ -92,6 +94,7 @@ class DataSource {
     Response response =
         await dio.get('/api/tokenEnable', data: {'token': token});
     ResponseModel responseModel = ResponseModel.fromJson(response.data);
+    log('토큰 유효 검사 : ${responseModel}');
     return responseModel;
   }
 }

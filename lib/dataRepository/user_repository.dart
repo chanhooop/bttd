@@ -9,9 +9,10 @@ import 'package:dio/dio.dart';
 
 class UserRepository {
   final DataSource _dataSource = DataSource();
+  final UserSecureStorage _userSecureStorage = UserSecureStorage();
   bool _isEmailDoubleCheck = false; // 이메일 중복 확인
   bool _isEmailAuthenticateCheck = false; // 이메일 인증 발송 확인
-  bool _isSignUp = false;
+  bool _isSignUp = false; // 회원가입 상태
 
   /// 로그인 하기
   Future<bool> postSignIn(String email, String pw) async {
@@ -48,13 +49,17 @@ class UserRepository {
 
   /// 자동로그인
   Future<bool> autoLogin() async{
-    String? isLogined = await UserSecureStorage().readLoginData(key: 'isLogined');
+    String? isLogined = await _userSecureStorage.readLoginData(key: 'isLogined');
+    String? accessToken = await _userSecureStorage.readLoginData(key: 'accessToken');
+    String? refreshToken = await _userSecureStorage.readLoginData(key: 'refreshToken');
     if(isLogined == 'true'){
       print('auto Login true');
       // todo : 자동로그인 로직 추가
+      _dataSource.postTokenCheck(accessToken ?? '');
       return true;
     } else{
       print('auto Login false');
+      _dataSource.postTokenCheck(accessToken ?? '');
     return false;
     }
   }
@@ -113,6 +118,7 @@ class UserRepository {
 
   /// 회원가입하기
   Future<bool> postSignUp(SignUpModel signUpModel) async {
+    _isSignUp = false;
     ResponseModel responseModel = await _dataSource.postSignUp(signUpModel);
     // 리스펀스 처리
     return _isSignUp;
@@ -136,6 +142,7 @@ class UserRepository {
       return true;
     } catch (e) {
       print('postImageUpload Error : ${e}');
+      Utils().showToast(msg: '이미지 업로드에 실패', isError: true);
       return false;
     }
   }

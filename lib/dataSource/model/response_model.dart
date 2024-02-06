@@ -7,7 +7,8 @@ part 'response_model.g.dart';
 class ResponseModel with _$ResponseModel {
   factory ResponseModel({
     String? status,
-    Map<String, dynamic>? data,
+    // Map<String, dynamic>? data,
+    dynamic data,
     String? message,
   }) = _ResponseModel;
 
