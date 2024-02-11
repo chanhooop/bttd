@@ -7,6 +7,7 @@ class UserModel with _$UserModel {
   factory UserModel({
     String? user_id,
     String? user_name,
+    String? user_age,
     String? user_weight,
     int? user_win,
     int? user_lose,

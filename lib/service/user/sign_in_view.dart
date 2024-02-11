@@ -17,6 +17,7 @@ class SignInView extends ConsumerWidget {
 
     return GestureDetector(
       onTap: () {
+        print('로그인 화면 on tap');
         FocusScope.of(context).unfocus();
       },
       child: DefaultLayout(

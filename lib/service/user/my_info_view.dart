@@ -53,11 +53,11 @@ class MyInfoView extends ConsumerWidget {
                     },
                     child: Text('프로필사진 변경'),
                   ),
-                  _infoRow(title: '이메일', onPressed: () {}),
-                  _infoRow(title: '닉네임', onPressed: () {}, buttonTitle: '수정하기'),
-                  _infoRow(title: '나이', onPressed: () {}, buttonTitle: '수정하기'),
-                  _infoRow(title: '무게', onPressed: () {}, buttonTitle: '수정하기'),
-                  _infoRow(title: '전적', onPressed: () {}),
+                  _infoRow(title: '이메일', hintText: userModel.user_id ?? '', onPressed: () {}),
+                  _infoRow(title: '닉네임', hintText: userModel.user_name ?? '',onPressed: () {}, buttonTitle: '수정하기'),
+                  _infoRow(title: '나이', hintText: userModel.user_age ?? '',onPressed: () {}, buttonTitle: '수정하기'),
+                  _infoRow(title: '무게', hintText: '${userModel.user_weight}kg' ?? '',onPressed: () {}, buttonTitle: '수정하기'),
+                  _infoRow(title: '전적', hintText: '${userModel.user_win}승 ${userModel.user_lose}패' ?? '',onPressed: () {}),
                 ],
               ),
             ),
@@ -69,6 +69,7 @@ class MyInfoView extends ConsumerWidget {
 
   _infoRow({
     required String title,
+    required String hintText,
     TextEditingController? textEditingController,
     String? buttonTitle,
     required VoidCallback? onPressed,
@@ -81,6 +82,7 @@ class MyInfoView extends ConsumerWidget {
             height: 30,
             child: CustomTextFormField(
               textEditingController: textEditingController,
+              hintText: hintText,
             ),
           ),
         ),

@@ -2,6 +2,7 @@ import 'package:bttd/core/layout/default_layout.dart';
 import 'package:bttd/service/home/home_screen_viewModel.dart';
 import 'package:bttd/service/home/post_detail_view.dart';
 import 'package:bttd/service/home/post_detail_viewModel.dart';
+import 'package:bttd/service/user/sign_in_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -12,6 +13,7 @@ class HomeScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    ref.read(SignInViewProvider.notifier).init();
     final state = ref.watch(homeScreenProvider);
     return DefaultLayout(
         title: 'Be The Top Dog',

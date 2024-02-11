@@ -1,10 +1,11 @@
 
-import 'package:bttd/core/utill.dart';
+import 'package:bttd/core/utills.dart';
 import 'package:bttd/dataRepository/user_secure_strage.dart';
 import 'package:bttd/dataSource/data_source.dart';
 import 'package:bttd/dataSource/model/response_model.dart';
 import 'package:bttd/dataSource/model/sign_up_model.dart';
 import 'package:bttd/dataSource/model/user_model.dart';
+import 'package:bttd/service/user/sign_in_view_model.dart';
 import 'package:dio/dio.dart';
 
 class UserRepository {
@@ -48,19 +49,51 @@ class UserRepository {
   }
 
   /// 자동로그인
-  Future<bool> autoLogin() async{
+  Future<SignInViewModel> autoLogin() async{
+    SignInViewModel signInViewModel = SignInViewModel();
     String? isLogined = await _userSecureStorage.readLoginData(key: 'isLogined');
+    String? userId = await _userSecureStorage.readLoginData(key: 'userId');
     String? accessToken = await _userSecureStorage.readLoginData(key: 'accessToken');
     String? refreshToken = await _userSecureStorage.readLoginData(key: 'refreshToken');
     if(isLogined == 'true'){
       print('auto Login true');
       // todo : 자동로그인 로직 추가
-      _dataSource.postTokenCheck(accessToken ?? '');
-      return true;
+      ResponseModel responseModel = await _dataSource.postTokenCheck(accessToken ?? '');
+      ResponseModel getMyInfoData = await _dataSource.getMyInfo(userId ?? '');
+      UserModel userModel = UserModel.fromJson(getMyInfoData.data);
+      bool check = bool.parse(responseModel.data.toString());
+      signInViewModel = signInViewModel.copyWith(
+        isLogined: check,
+        userModel: userModel
+      );
+      // access 토큰 실패시
+      if(check == false){
+        responseModel = await _dataSource.postTokenCheck(refreshToken ?? '');
+        getMyInfoData = await _dataSource.getMyInfo(userId ?? '');
+        UserModel userModel = UserModel.fromJson(getMyInfoData.data);
+        check = bool.parse(responseModel.data.toString());
+        // refresh 토큰 성공시
+        if(check == true){
+          signInViewModel = signInViewModel.copyWith(
+              isLogined: check,
+              userModel: userModel
+          );
+          return signInViewModel;
+        }else{
+          // 모두 실패시
+          signInViewModel = signInViewModel.copyWith(
+              isLogined: false,
+              userModel: UserModel()
+          );
+          return signInViewModel;
+        }
+      }
+      // access 토큰 성공시
+      return signInViewModel;
     } else{
       print('auto Login false');
       _dataSource.postTokenCheck(accessToken ?? '');
-    return false;
+    return SignInViewModel();
     }
   }
 

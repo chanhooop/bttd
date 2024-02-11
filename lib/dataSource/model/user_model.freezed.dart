@@ -22,6 +22,7 @@ UserModel _$UserModelFromJson(Map<String, dynamic> json) {
 mixin _$UserModel {
   String? get user_id => throw _privateConstructorUsedError;
   String? get user_name => throw _privateConstructorUsedError;
+  String? get user_age => throw _privateConstructorUsedError;
   String? get user_weight => throw _privateConstructorUsedError;
   int? get user_win => throw _privateConstructorUsedError;
   int? get user_lose => throw _privateConstructorUsedError;
@@ -41,6 +42,7 @@ abstract class $UserModelCopyWith<$Res> {
   $Res call(
       {String? user_id,
       String? user_name,
+      String? user_age,
       String? user_weight,
       int? user_win,
       int? user_lose,
@@ -62,6 +64,7 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
   $Res call({
     Object? user_id = freezed,
     Object? user_name = freezed,
+    Object? user_age = freezed,
     Object? user_weight = freezed,
     Object? user_win = freezed,
     Object? user_lose = freezed,
@@ -75,6 +78,10 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
       user_name: freezed == user_name
           ? _value.user_name
           : user_name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      user_age: freezed == user_age
+          ? _value.user_age
+          : user_age // ignore: cast_nullable_to_non_nullable
               as String?,
       user_weight: freezed == user_weight
           ? _value.user_weight
@@ -107,6 +114,7 @@ abstract class _$$UserModelImplCopyWith<$Res>
   $Res call(
       {String? user_id,
       String? user_name,
+      String? user_age,
       String? user_weight,
       int? user_win,
       int? user_lose,
@@ -126,6 +134,7 @@ class __$$UserModelImplCopyWithImpl<$Res>
   $Res call({
     Object? user_id = freezed,
     Object? user_name = freezed,
+    Object? user_age = freezed,
     Object? user_weight = freezed,
     Object? user_win = freezed,
     Object? user_lose = freezed,
@@ -139,6 +148,10 @@ class __$$UserModelImplCopyWithImpl<$Res>
       user_name: freezed == user_name
           ? _value.user_name
           : user_name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      user_age: freezed == user_age
+          ? _value.user_age
+          : user_age // ignore: cast_nullable_to_non_nullable
               as String?,
       user_weight: freezed == user_weight
           ? _value.user_weight
@@ -166,6 +179,7 @@ class _$UserModelImpl implements _UserModel {
   _$UserModelImpl(
       {this.user_id,
       this.user_name,
+      this.user_age,
       this.user_weight,
       this.user_win,
       this.user_lose,
@@ -179,6 +193,8 @@ class _$UserModelImpl implements _UserModel {
   @override
   final String? user_name;
   @override
+  final String? user_age;
+  @override
   final String? user_weight;
   @override
   final int? user_win;
@@ -189,7 +205,7 @@ class _$UserModelImpl implements _UserModel {
 
   @override
   String toString() {
-    return 'UserModel(user_id: $user_id, user_name: $user_name, user_weight: $user_weight, user_win: $user_win, user_lose: $user_lose, photo: $photo)';
+    return 'UserModel(user_id: $user_id, user_name: $user_name, user_age: $user_age, user_weight: $user_weight, user_win: $user_win, user_lose: $user_lose, photo: $photo)';
   }
 
   @override
@@ -200,6 +216,8 @@ class _$UserModelImpl implements _UserModel {
             (identical(other.user_id, user_id) || other.user_id == user_id) &&
             (identical(other.user_name, user_name) ||
                 other.user_name == user_name) &&
+            (identical(other.user_age, user_age) ||
+                other.user_age == user_age) &&
             (identical(other.user_weight, user_weight) ||
                 other.user_weight == user_weight) &&
             (identical(other.user_win, user_win) ||
@@ -211,8 +229,8 @@ class _$UserModelImpl implements _UserModel {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, user_id, user_name, user_weight, user_win, user_lose, photo);
+  int get hashCode => Object.hash(runtimeType, user_id, user_name, user_age,
+      user_weight, user_win, user_lose, photo);
 
   @JsonKey(ignore: true)
   @override
@@ -232,6 +250,7 @@ abstract class _UserModel implements UserModel {
   factory _UserModel(
       {final String? user_id,
       final String? user_name,
+      final String? user_age,
       final String? user_weight,
       final int? user_win,
       final int? user_lose,
@@ -244,6 +263,8 @@ abstract class _UserModel implements UserModel {
   String? get user_id;
   @override
   String? get user_name;
+  @override
+  String? get user_age;
   @override
   String? get user_weight;
   @override

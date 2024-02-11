@@ -175,7 +175,9 @@ class DrawerWidget extends ConsumerWidget {
                     onTap: () {
                       Scaffold.of(context).closeDrawer();
                       Future.delayed(Duration(milliseconds: 240))
-                          .then((value) {});
+                          .then((value) {
+                            ref.read(SignInViewProvider.notifier).signOut();
+                      });
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
