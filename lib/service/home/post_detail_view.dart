@@ -1,5 +1,6 @@
 import 'package:bttd/core/layout/default_layout.dart';
 import 'package:bttd/core/widget/custom_network_image_widget.dart';
+import 'package:bttd/service/home/post_detail_viewModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -10,6 +11,10 @@ class PostDetailView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(postDetailViewProvider);
+
+    String _postTitle = state.boardModel?.post_title ?? '';
+
     return DefaultLayout(
       title: 'Be The Top Dog',
       body: SingleChildScrollView(
@@ -28,7 +33,7 @@ class PostDetailView extends ConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      '제목 란',
+                      _postTitle,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 30,

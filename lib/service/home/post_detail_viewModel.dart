@@ -15,7 +15,7 @@ class PostDetailViewModel with _$PostDetailViewModel {
   }) = _PostDetailViewModel;
 }
 /// 프로바이더
-final postDetailViewProvider = StateNotifierProvider(
+final postDetailViewProvider = StateNotifierProvider<PostDetailViewNotifier, PostDetailViewModel>(
     (ref) => PostDetailViewNotifier(PostDetailViewModel()));
 
 /// 노티파이어
