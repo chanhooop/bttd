@@ -9,6 +9,7 @@ import 'package:go_router/go_router.dart';
 
 class HomeScreen extends ConsumerWidget {
   static const routeName = "HomeScreen";
+
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
@@ -20,25 +21,25 @@ class HomeScreen extends ConsumerWidget {
         isdrawer: true,
         body: state.listDataError
             ? Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Center(
-                  child: Text('데이터 송수신 에러'),
-                ),
-                ElevatedButton(
-                    onPressed: () {
-                      context.pushNamed(PostDetailView.routeName);
-                    },
-                    child: Text('디테일 뷰로 이동'))
-              ],
-            )
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Center(
+                    child: Text('데이터 송수신 에러'),
+                  ),
+                  ElevatedButton(
+                      onPressed: () {
+                        context.pushNamed(PostDetailView.routeName);
+                      },
+                      child: Text('디테일 뷰로 이동'))
+                ],
+              )
             : RefreshIndicator(
-              onRefresh: () async{
-                 await ref.read(homeScreenProvider.notifier).initData();
-              },
-              child: SingleChildScrollView(
-                        physics: AlwaysScrollableScrollPhysics(),
-                child: Column(
+                onRefresh: () async {
+                  await ref.read(homeScreenProvider.notifier).initData();
+                },
+                child: SingleChildScrollView(
+                  physics: AlwaysScrollableScrollPhysics(),
+                  child: Column(
                     children: [
                       if (state.list == null) ...[
                         Center(
@@ -50,7 +51,9 @@ class HomeScreen extends ConsumerWidget {
                               onTap: () {
                                 ref
                                     .read(postDetailViewProvider.notifier)
-                                    .goDetailView(context, e);
+                                    .goDetailView(context, postId: e.post_id);
+                                // context.pushNamed(PostDetailView.routeName,
+                                //     extra: e.post_id);
                               },
                               leading: Container(
                                 width: 50,
@@ -59,7 +62,9 @@ class HomeScreen extends ConsumerWidget {
                                     borderRadius: BorderRadius.circular(5),
                                     color: Colors.green.withOpacity(0.5)),
                                 child: Center(
-                                  child: e.user_id == null ? Text('모집중') : Text(e.user_id.toString()),
+                                  child: e.user_id == null
+                                      ? Text('모집중')
+                                      : Text(e.user_id.toString()),
                                 ),
                               ),
                               title: Text(
@@ -83,7 +88,8 @@ class HomeScreen extends ConsumerWidget {
                                     ),
                                     Padding(
                                       padding: EdgeInsets.only(left: 5.0),
-                                      child: Text(e.comment_count.toString()), // 댓글 수
+                                      child: Text(
+                                          e.comment_count.toString()), // 댓글 수
                                     ),
                                   ],
                                 ),
@@ -104,7 +110,7 @@ class HomeScreen extends ConsumerWidget {
                       ]
                     ],
                   ),
-              ),
-            ));
+                ),
+              ));
   }
 }

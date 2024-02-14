@@ -21,6 +21,7 @@ Map<String, dynamic> _$$BoardModelListImplToJson(
 
 _$BoardModelImpl _$$BoardModelImplFromJson(Map<String, dynamic> json) =>
     _$BoardModelImpl(
+      post_id: json['post_id'] as int?,
       user_id: json['user_id'] as String?,
       post_title: json['post_title'] as String?,
       user_age: json['user_age'] as String?,
@@ -31,10 +32,14 @@ _$BoardModelImpl _$$BoardModelImplFromJson(Map<String, dynamic> json) =>
       away_id: json['away_id'] as String?,
       score: json['score'] as bool?,
       comment_count: json['comment_count'] as int?,
+      comments: (json['comments'] as List<dynamic>?)
+          ?.map((e) => CommentModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$$BoardModelImplToJson(_$BoardModelImpl instance) =>
     <String, dynamic>{
+      'post_id': instance.post_id,
       'user_id': instance.user_id,
       'post_title': instance.post_title,
       'user_age': instance.user_age,
@@ -45,6 +50,7 @@ Map<String, dynamic> _$$BoardModelImplToJson(_$BoardModelImpl instance) =>
       'away_id': instance.away_id,
       'score': instance.score,
       'comment_count': instance.comment_count,
+      'comments': instance.comments,
     };
 
 _$CommentModelImpl _$$CommentModelImplFromJson(Map<String, dynamic> json) =>

@@ -96,7 +96,9 @@ class __$$BoardModelListImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$BoardModelListImpl implements _BoardModelList {
+class _$BoardModelListImpl
+    with DiagnosticableTreeMixin
+    implements _BoardModelList {
   _$BoardModelListImpl({final List<BoardModel>? data}) : _data = data;
 
   factory _$BoardModelListImpl.fromJson(Map<String, dynamic> json) =>
@@ -113,8 +115,16 @@ class _$BoardModelListImpl implements _BoardModelList {
   }
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'BoardModelList(data: $data)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'BoardModelList'))
+      ..add(DiagnosticsProperty('data', data));
   }
 
   @override
@@ -166,6 +176,7 @@ BoardModel _$BoardModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$BoardModel {
+  int? get post_id => throw _privateConstructorUsedError;
   String? get user_id => throw _privateConstructorUsedError;
   String? get post_title => throw _privateConstructorUsedError;
   String? get user_age => throw _privateConstructorUsedError;
@@ -176,6 +187,7 @@ mixin _$BoardModel {
   String? get away_id => throw _privateConstructorUsedError;
   bool? get score => throw _privateConstructorUsedError;
   int? get comment_count => throw _privateConstructorUsedError;
+  List<CommentModel>? get comments => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -190,7 +202,8 @@ abstract class $BoardModelCopyWith<$Res> {
       _$BoardModelCopyWithImpl<$Res, BoardModel>;
   @useResult
   $Res call(
-      {String? user_id,
+      {int? post_id,
+      String? user_id,
       String? post_title,
       String? user_age,
       String? user_weight,
@@ -199,7 +212,8 @@ abstract class $BoardModelCopyWith<$Res> {
       String? post_context,
       String? away_id,
       bool? score,
-      int? comment_count});
+      int? comment_count,
+      List<CommentModel>? comments});
 }
 
 /// @nodoc
@@ -215,6 +229,7 @@ class _$BoardModelCopyWithImpl<$Res, $Val extends BoardModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? post_id = freezed,
     Object? user_id = freezed,
     Object? post_title = freezed,
     Object? user_age = freezed,
@@ -225,8 +240,13 @@ class _$BoardModelCopyWithImpl<$Res, $Val extends BoardModel>
     Object? away_id = freezed,
     Object? score = freezed,
     Object? comment_count = freezed,
+    Object? comments = freezed,
   }) {
     return _then(_value.copyWith(
+      post_id: freezed == post_id
+          ? _value.post_id
+          : post_id // ignore: cast_nullable_to_non_nullable
+              as int?,
       user_id: freezed == user_id
           ? _value.user_id
           : user_id // ignore: cast_nullable_to_non_nullable
@@ -267,6 +287,10 @@ class _$BoardModelCopyWithImpl<$Res, $Val extends BoardModel>
           ? _value.comment_count
           : comment_count // ignore: cast_nullable_to_non_nullable
               as int?,
+      comments: freezed == comments
+          ? _value.comments
+          : comments // ignore: cast_nullable_to_non_nullable
+              as List<CommentModel>?,
     ) as $Val);
   }
 }
@@ -280,7 +304,8 @@ abstract class _$$BoardModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String? user_id,
+      {int? post_id,
+      String? user_id,
       String? post_title,
       String? user_age,
       String? user_weight,
@@ -289,7 +314,8 @@ abstract class _$$BoardModelImplCopyWith<$Res>
       String? post_context,
       String? away_id,
       bool? score,
-      int? comment_count});
+      int? comment_count,
+      List<CommentModel>? comments});
 }
 
 /// @nodoc
@@ -303,6 +329,7 @@ class __$$BoardModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? post_id = freezed,
     Object? user_id = freezed,
     Object? post_title = freezed,
     Object? user_age = freezed,
@@ -313,8 +340,13 @@ class __$$BoardModelImplCopyWithImpl<$Res>
     Object? away_id = freezed,
     Object? score = freezed,
     Object? comment_count = freezed,
+    Object? comments = freezed,
   }) {
     return _then(_$BoardModelImpl(
+      post_id: freezed == post_id
+          ? _value.post_id
+          : post_id // ignore: cast_nullable_to_non_nullable
+              as int?,
       user_id: freezed == user_id
           ? _value.user_id
           : user_id // ignore: cast_nullable_to_non_nullable
@@ -355,15 +387,20 @@ class __$$BoardModelImplCopyWithImpl<$Res>
           ? _value.comment_count
           : comment_count // ignore: cast_nullable_to_non_nullable
               as int?,
+      comments: freezed == comments
+          ? _value._comments
+          : comments // ignore: cast_nullable_to_non_nullable
+              as List<CommentModel>?,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$BoardModelImpl implements _BoardModel {
+class _$BoardModelImpl with DiagnosticableTreeMixin implements _BoardModel {
   _$BoardModelImpl(
-      {this.user_id,
+      {this.post_id,
+      this.user_id,
       this.post_title,
       this.user_age,
       this.user_weight,
@@ -372,11 +409,15 @@ class _$BoardModelImpl implements _BoardModel {
       this.post_context,
       this.away_id,
       this.score,
-      this.comment_count});
+      this.comment_count,
+      final List<CommentModel>? comments})
+      : _comments = comments;
 
   factory _$BoardModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$BoardModelImplFromJson(json);
 
+  @override
+  final int? post_id;
   @override
   final String? user_id;
   @override
@@ -397,10 +438,38 @@ class _$BoardModelImpl implements _BoardModel {
   final bool? score;
   @override
   final int? comment_count;
+  final List<CommentModel>? _comments;
+  @override
+  List<CommentModel>? get comments {
+    final value = _comments;
+    if (value == null) return null;
+    if (_comments is EqualUnmodifiableListView) return _comments;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
 
   @override
-  String toString() {
-    return 'BoardModel(user_id: $user_id, post_title: $post_title, user_age: $user_age, user_weight: $user_weight, user_win: $user_win, user_lose: $user_lose, post_context: $post_context, away_id: $away_id, score: $score, comment_count: $comment_count)';
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'BoardModel(post_id: $post_id, user_id: $user_id, post_title: $post_title, user_age: $user_age, user_weight: $user_weight, user_win: $user_win, user_lose: $user_lose, post_context: $post_context, away_id: $away_id, score: $score, comment_count: $comment_count, comments: $comments)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'BoardModel'))
+      ..add(DiagnosticsProperty('post_id', post_id))
+      ..add(DiagnosticsProperty('user_id', user_id))
+      ..add(DiagnosticsProperty('post_title', post_title))
+      ..add(DiagnosticsProperty('user_age', user_age))
+      ..add(DiagnosticsProperty('user_weight', user_weight))
+      ..add(DiagnosticsProperty('user_win', user_win))
+      ..add(DiagnosticsProperty('user_lose', user_lose))
+      ..add(DiagnosticsProperty('post_context', post_context))
+      ..add(DiagnosticsProperty('away_id', away_id))
+      ..add(DiagnosticsProperty('score', score))
+      ..add(DiagnosticsProperty('comment_count', comment_count))
+      ..add(DiagnosticsProperty('comments', comments));
   }
 
   @override
@@ -408,6 +477,7 @@ class _$BoardModelImpl implements _BoardModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$BoardModelImpl &&
+            (identical(other.post_id, post_id) || other.post_id == post_id) &&
             (identical(other.user_id, user_id) || other.user_id == user_id) &&
             (identical(other.post_title, post_title) ||
                 other.post_title == post_title) &&
@@ -424,13 +494,15 @@ class _$BoardModelImpl implements _BoardModel {
             (identical(other.away_id, away_id) || other.away_id == away_id) &&
             (identical(other.score, score) || other.score == score) &&
             (identical(other.comment_count, comment_count) ||
-                other.comment_count == comment_count));
+                other.comment_count == comment_count) &&
+            const DeepCollectionEquality().equals(other._comments, _comments));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      post_id,
       user_id,
       post_title,
       user_age,
@@ -440,7 +512,8 @@ class _$BoardModelImpl implements _BoardModel {
       post_context,
       away_id,
       score,
-      comment_count);
+      comment_count,
+      const DeepCollectionEquality().hash(_comments));
 
   @JsonKey(ignore: true)
   @override
@@ -458,7 +531,8 @@ class _$BoardModelImpl implements _BoardModel {
 
 abstract class _BoardModel implements BoardModel {
   factory _BoardModel(
-      {final String? user_id,
+      {final int? post_id,
+      final String? user_id,
       final String? post_title,
       final String? user_age,
       final String? user_weight,
@@ -467,11 +541,14 @@ abstract class _BoardModel implements BoardModel {
       final String? post_context,
       final String? away_id,
       final bool? score,
-      final int? comment_count}) = _$BoardModelImpl;
+      final int? comment_count,
+      final List<CommentModel>? comments}) = _$BoardModelImpl;
 
   factory _BoardModel.fromJson(Map<String, dynamic> json) =
       _$BoardModelImpl.fromJson;
 
+  @override
+  int? get post_id;
   @override
   String? get user_id;
   @override
@@ -492,6 +569,8 @@ abstract class _BoardModel implements BoardModel {
   bool? get score;
   @override
   int? get comment_count;
+  @override
+  List<CommentModel>? get comments;
   @override
   @JsonKey(ignore: true)
   _$$BoardModelImplCopyWith<_$BoardModelImpl> get copyWith =>
@@ -634,7 +713,7 @@ class __$$CommentModelImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$CommentModelImpl implements _CommentModel {
+class _$CommentModelImpl with DiagnosticableTreeMixin implements _CommentModel {
   _$CommentModelImpl(
       {this.request_form_id,
       this.request_user_id,
@@ -657,8 +736,20 @@ class _$CommentModelImpl implements _CommentModel {
   final String? request_date;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'CommentModel(request_form_id: $request_form_id, request_user_id: $request_user_id, request_context: $request_context, photo: $photo, request_date: $request_date)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'CommentModel'))
+      ..add(DiagnosticsProperty('request_form_id', request_form_id))
+      ..add(DiagnosticsProperty('request_user_id', request_user_id))
+      ..add(DiagnosticsProperty('request_context', request_context))
+      ..add(DiagnosticsProperty('photo', photo))
+      ..add(DiagnosticsProperty('request_date', request_date));
   }
 
   @override

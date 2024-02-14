@@ -72,7 +72,9 @@ final GoRouter router = GoRouter(
                 path: PostDetailView.routeName,
                 name: PostDetailView.routeName,
                 parentNavigatorKey: _rootKey,
-                builder: (context, state) => const PostDetailView(),
+                builder: (context, state) => PostDetailView(
+                  extra: state.extra,
+                ),
               ),
             ],
           ),

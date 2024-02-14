@@ -1,19 +1,26 @@
 import 'package:bttd/core/layout/default_layout.dart';
 import 'package:bttd/core/widget/custom_network_image_widget.dart';
+import 'package:bttd/dataSource/model/board_model.dart';
 import 'package:bttd/service/home/post_detail_viewModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class PostDetailView extends ConsumerWidget {
   static const routeName = 'PostDetailView';
+  final Object? extra;
 
-  const PostDetailView({Key? key}) : super(key: key);
+  const PostDetailView({Key? key, this.extra}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(postDetailViewProvider);
-
     String _postTitle = state.boardModel?.post_title ?? '';
+    String _user_age = state.boardModel?.user_age ?? '';
+    String _user_weight = state.boardModel?.user_weight ?? '';
+    String _user_win = state.boardModel?.user_win.toString() ?? '';
+    String _user_lose = state.boardModel?.user_lose.toString() ?? '';
+    String _post_context = state.boardModel?.post_context ?? '';
+
 
     return DefaultLayout(
       title: 'Be The Top Dog',
@@ -50,23 +57,23 @@ class PostDetailView extends ConsumerWidget {
                       '희망지역 : 어디어디어디',
                     ),
                     Text(
-                      '나이:',
+                      '나이 : $_user_age',
                     ),
                     Text(
-                      '무게:',
+                      '무게 : $_user_weight',
                     ),
                     Text(
-                      '경력:',
+                      '경력 : 경력',
                     ),
                     Text(
-                      '전적:',
+                      '전적 : ${_user_win}승 ${_user_lose}패',
                     ),
                     SizedBox(height: 20),
                     Container(
                       width: MediaQuery.of(context).size.width,
                       color: Colors.red,
                       child: Text(
-                        '모집 내용입니다. dfsdfdfdfddfsdfsdf',
+                        '$_post_context',
                       ),
                     ),
                   ],

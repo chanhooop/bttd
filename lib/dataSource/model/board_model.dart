@@ -1,6 +1,8 @@
+import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'board_model.freezed.dart';
+
 part 'board_model.g.dart';
 
 @freezed
@@ -16,6 +18,7 @@ class BoardModelList with _$BoardModelList {
 @freezed
 class BoardModel with _$BoardModel {
   factory BoardModel({
+    int? post_id,
     String? user_id,
     String? post_title,
     String? user_age,
@@ -26,6 +29,7 @@ class BoardModel with _$BoardModel {
     String? away_id,
     bool? score,
     int? comment_count,
+    List<CommentModel>? comments,
   }) = _BoardModel;
 
   factory BoardModel.fromJson(Map<String, dynamic> json) =>
@@ -33,15 +37,15 @@ class BoardModel with _$BoardModel {
 }
 
 @freezed
-class CommentModel with _$CommentModel{
+class CommentModel with _$CommentModel {
   factory CommentModel({
     String? request_form_id,
     String? request_user_id,
     String? request_context,
     String? photo,
     String? request_date,
-}) = _CommentModel;
+  }) = _CommentModel;
 
-factory CommentModel.fromJson(Map<String, dynamic> json) =>
-_$CommentModelFromJson(json);
+  factory CommentModel.fromJson(Map<String, dynamic> json) =>
+      _$CommentModelFromJson(json);
 }

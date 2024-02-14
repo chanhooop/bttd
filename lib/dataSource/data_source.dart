@@ -42,10 +42,26 @@ class DataSource {
     return BoardModelList.fromJson(_response.data);
   }
 
+  /// 게시글 하나 가져오기
+  Future<BoardModel> getBoardModel(int post_id) async {
+    print('DataSource => getBoardModel');
+    BoardModel boardModel = BoardModel();
+    try{
+      /// todo:백단수정 필요 api 공백처리
+    Response response = await dio.get('/api/getDetailBoard', queryParameters: {"post_id": post_id.toString()});
+    boardModel = BoardModel.fromJson(response.data);
+    print(boardModel);
+    return boardModel;
+    }catch(e){
+      print('게시글 하나 가져오기 error : ${e}');
+      return BoardModel();
+    }
+  }
+
   /// 사진 업로드 하기
   Future<ResponseModel> postImageUpload(FormData formData) async {
     /// Todo :  서버 수정 뒤 고치기
-    ResponseModel _responseModel = ResponseModel();
+    ResponseModel responseModel = ResponseModel();
     dio.options.contentType = 'multipart/form-data';
     print('서버 postImageUpload');
     Response response = await dio.post('/upload',
@@ -53,7 +69,7 @@ class DataSource {
         options: Options().copyWith(contentType: 'multipart/form-data'));
     // return ResponseModel.fromJson(responseModel);
     print(response);
-    return _responseModel;
+    return responseModel;
   }
 
   /// 정보 수정하기

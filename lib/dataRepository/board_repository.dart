@@ -18,14 +18,13 @@ class BoardRepository {
   }
 
   /// 각각 게시글 데이터
-  Future<BoardModel> getBoard({bool cached = false}) async {
+  Future<BoardModel> getBoard(int postId, {bool cached = false}) async {
     print('BoardRepository => getBoard');
-    // if (!cached) {
-    //   cachedBoardListData = await _dataSource.getBoardList();
-    //   return cachedBoardListData;
-    // } else {
-    //   return cachedBoardListData;
-    // }
-    return cachedBoardModel;
+    if (!cached) {
+      cachedBoardModel = await _dataSource.getBoardModel(postId);
+      return cachedBoardModel;
+    } else {
+      return cachedBoardModel;
+    }
   }
 }
