@@ -3,7 +3,7 @@ import 'package:bttd/3_1.dart';
 import 'package:bttd/core/layout/bottom_navigation_layout.dart';
 import 'package:bttd/service/game/confirm_game_screen.dart';
 import 'package:bttd/service/home/matching_screen.dart';
-import 'package:bttd/service/home/post_add_screen.dart';
+import 'package:bttd/service/home/post_add_view.dart';
 import 'package:bttd/service/home/post_detail_view.dart';
 import 'package:bttd/service/user/my_info_view.dart';
 import 'package:bttd/service/user/sign_in_view.dart';
@@ -55,9 +55,9 @@ final GoRouter router = GoRouter(
               builder: (context, state) => const MatchingScreen(),
               routes: [
                 GoRoute(
-                    path: PostAddScreen.routeName,
-                    name: PostAddScreen.routeName,
-                    builder: (context, state) => const PostAddScreen()),
+                    path: PostAddView.routeName,
+                    name: PostAddView.routeName,
+                    builder: (context, state) => const PostAddView()),
               ]),
         ]),
 

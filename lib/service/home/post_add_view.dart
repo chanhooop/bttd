@@ -2,9 +2,9 @@ import 'package:bttd/core/layout/default_layout.dart';
 import 'package:bttd/core/widget/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 
-class PostAddScreen extends StatelessWidget {
-  static String routeName = 'PostAddScreen';
-  const PostAddScreen({Key? key}) : super(key: key);
+class PostAddView extends StatelessWidget {
+  static String routeName = 'PostAddView';
+  const PostAddView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

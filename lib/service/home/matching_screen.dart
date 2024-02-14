@@ -1,6 +1,5 @@
 import 'package:bttd/core/layout/default_layout.dart';
-import 'package:bttd/core/widget/drawer_widget.dart';
-import 'package:bttd/service/home/post_add_screen.dart';
+import 'package:bttd/service/home/post_add_view.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -15,7 +14,7 @@ class MatchingScreen extends StatelessWidget {
         isdrawer: true,
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            context.pushNamed(PostAddScreen.routeName);
+            context.pushNamed(PostAddView.routeName);
           },
           child: Icon(
             Icons.add,
