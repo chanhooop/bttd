@@ -1,7 +1,7 @@
 import 'package:bttd/core/widget/custom_network_image_widget.dart';
 import 'package:bttd/dataSource/model/user_model.dart';
 import 'package:bttd/service/game/confirm_game_screen.dart';
-import 'package:bttd/service/home/matching_screen.dart';
+import 'package:bttd/service/home/matching_view.dart';
 import 'package:bttd/service/user/my_info_view.dart';
 import 'package:bttd/service/user/sign_in_view.dart';
 import 'package:bttd/service/user/sign_in_view_model.dart';
@@ -75,7 +75,7 @@ class DrawerWidget extends ConsumerWidget {
                 onTap: () {
                   Scaffold.of(context).closeDrawer();
                   Future.delayed(Duration(milliseconds: 240)).then(
-                      (value) => context.goNamed(MatchingScreen.routeName));
+                      (value) => context.goNamed(MatchingView.routeName));
                 },
                 child: Padding(
                   padding: EdgeInsets.symmetric(vertical: 10),

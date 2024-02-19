@@ -62,7 +62,6 @@ class SignInViewNotifier extends StateNotifier<SignInViewModel> {
       bool isLogined = await _userRepository.postSignIn(
           state.emailTxtCtr?.text ?? '', state.pwTxtCtr?.text ?? '');
       if (isLogined) {
-
         // 내졍보 가져오기 로직
         userModel = await UserRepository().getMyInfo(state.emailTxtCtr!.text);
         state = state.copyWith(

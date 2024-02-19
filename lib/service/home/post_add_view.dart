@@ -1,14 +1,17 @@
 import 'package:bttd/core/layout/default_layout.dart';
 import 'package:bttd/core/widget/custom_text_form_field.dart';
+import 'package:bttd/dataSource/model/user_model.dart';
+import 'package:bttd/service/user/sign_in_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class PostAddView extends StatelessWidget {
+class PostAddView extends ConsumerWidget {
   static String routeName = 'PostAddView';
   const PostAddView({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    TextEditingController textEditingController = TextEditingController();
+  Widget build(BuildContext context, WidgetRef ref) {
+    UserModel userModel = ref.watch(SignInViewProvider).userModel ?? UserModel();
 
     return DefaultLayout(
       title: '게시글 등록',
@@ -62,21 +65,21 @@ class PostAddView extends StatelessWidget {
               ],
             ),
             Text(
-              '나이 : ',
+              '나이 : ${userModel.user_age}세',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 20,
               ),
             ),
             Text(
-              '무게 : ',
+              '무게 : ${userModel.user_weight}kg',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 20,
               ),
             ),
             Text(
-              '전적 : ',
+              '전적 : ${userModel.user_win}승 ${userModel.user_lose}패',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 20,

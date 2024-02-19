@@ -2,7 +2,7 @@ import 'package:bttd/3.dart';
 import 'package:bttd/3_1.dart';
 import 'package:bttd/core/layout/bottom_navigation_layout.dart';
 import 'package:bttd/service/game/confirm_game_screen.dart';
-import 'package:bttd/service/home/matching_screen.dart';
+import 'package:bttd/service/home/matching_view.dart';
 import 'package:bttd/service/home/post_add_view.dart';
 import 'package:bttd/service/home/post_detail_view.dart';
 import 'package:bttd/service/user/my_info_view.dart';
@@ -50,9 +50,9 @@ final GoRouter router = GoRouter(
         /// 1번 BottomNavigation 탭
         StatefulShellBranch(routes: <RouteBase>[
           GoRoute(
-              path: '/${MatchingScreen.routeName}',
-              name: MatchingScreen.routeName,
-              builder: (context, state) => const MatchingScreen(),
+              path: '/${MatchingView.routeName}',
+              name: MatchingView.routeName,
+              builder: (context, state) => const MatchingView(),
               routes: [
                 GoRoute(
                     path: PostAddView.routeName,

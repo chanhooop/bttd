@@ -1,20 +1,49 @@
 import 'package:bttd/core/layout/default_layout.dart';
+import 'package:bttd/core/utills.dart';
 import 'package:bttd/service/home/post_add_view.dart';
+import 'package:bttd/service/user/sign_in_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-class MatchingScreen extends StatelessWidget {
-  static String routeName = 'MatchingScreen';
-  const MatchingScreen({Key? key}) : super(key: key);
+import '../user/sign_in_view.dart';
+
+class MatchingView extends ConsumerWidget {
+  static String routeName = 'MatchingView';
+
+  const MatchingView({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    bool loginState = ref.watch(SignInViewProvider).isLogined ?? false;
+
     return DefaultLayout(
         title: 'Be The Top Dog',
         isdrawer: true,
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            context.pushNamed(PostAddView.routeName);
+            print(loginState);
+            if (loginState) {
+              context.pushNamed(PostAddView.routeName);
+            } else {
+              Utils().customShowDialog(
+                context: context,
+                title: '로그인 후 이용해주세요.',
+                actions: [
+                  TextButton(
+                      onPressed: () {
+                        context.pop();
+                        context.pushNamed(SignInView.routeName);
+                      },
+                      child: Text('로그인')),
+                  TextButton(
+                      onPressed: () {
+                        context.pop();
+                      },
+                      child: Text('닫기')),
+                ],
+              );
+            }
           },
           child: Icon(
             Icons.add,
