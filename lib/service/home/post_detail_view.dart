@@ -1,6 +1,6 @@
 import 'package:bttd/core/layout/default_layout.dart';
+import 'package:bttd/core/utills.dart';
 import 'package:bttd/core/widget/custom_network_image_widget.dart';
-import 'package:bttd/dataSource/model/board_model.dart';
 import 'package:bttd/service/home/post_detail_viewModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -20,7 +20,6 @@ class PostDetailView extends ConsumerWidget {
     String _user_win = state.boardModel?.user_win.toString() ?? '';
     String _user_lose = state.boardModel?.user_lose.toString() ?? '';
     String _post_context = state.boardModel?.post_context ?? '';
-
 
     return DefaultLayout(
       title: 'Be The Top Dog',
@@ -95,7 +94,9 @@ class PostDetailView extends ConsumerWidget {
                   width: 30,
                 ),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    Utils().customShowDialog(context: context, title: '로그인 후 이용해주세요',button_1: '확인', func_1: (){});
+                  },
                   child: Row(
                     children: [
                       Icon(Icons.add_box_outlined),
