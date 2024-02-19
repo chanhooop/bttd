@@ -54,24 +54,31 @@ class SignInViewNotifier extends StateNotifier<SignInViewModel> {
   // 로그인
   Future<bool> signIn() async {
     UserModel userModel = UserModel();
-    bool isLogined = await _userRepository.postSignIn(
-        state.emailTxtCtr!.text, state.pwTxtCtr!.text);
-    if (isLogined) {
-      // 내졍보 가져오기 로직
-      userModel = await UserRepository().getMyInfo(state.emailTxtCtr!.text);
-      state = state.copyWith(
-          isLogined: isLogined,
-          userModel: userModel,
-          emailTxtCtr: TextEditingController(),
-          pwTxtCtr: TextEditingController());
-      Utils().showToast(
-          msg: '로그인 성공', isError: false, toastGravity: ToastGravity.CENTER);
-    } else {
-      state = state.copyWith(isLogined: isLogined, userModel: userModel);
-      Utils().showToast(
-          msg: '로그인 실패', isError: true, toastGravity: ToastGravity.CENTER);
+
+    if(state.emailTxtCtr?.text == '' || state.pwTxtCtr?.text == ''){
+      Utils().showToast(msg: '이메일과 비밀번호를 작성해주세요.', isError: true);
+      return false;
+    }else {
+      bool isLogined = await _userRepository.postSignIn(
+          state.emailTxtCtr?.text ?? '', state.pwTxtCtr?.text ?? '');
+      if (isLogined) {
+
+        // 내졍보 가져오기 로직
+        userModel = await UserRepository().getMyInfo(state.emailTxtCtr!.text);
+        state = state.copyWith(
+            isLogined: isLogined,
+            userModel: userModel,
+            emailTxtCtr: TextEditingController(),
+            pwTxtCtr: TextEditingController());
+        Utils().showToast(
+            msg: '로그인 성공', isError: false, toastGravity: ToastGravity.CENTER);
+      } else {
+        state = state.copyWith(isLogined: isLogined, userModel: userModel);
+        Utils().showToast(
+            msg: '로그인 실패', isError: true, toastGravity: ToastGravity.CENTER);
+      }
+      return isLogined;
     }
-    return isLogined;
   }
 
   // 로그아웃

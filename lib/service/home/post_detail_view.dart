@@ -2,8 +2,11 @@ import 'package:bttd/core/layout/default_layout.dart';
 import 'package:bttd/core/utills.dart';
 import 'package:bttd/core/widget/custom_network_image_widget.dart';
 import 'package:bttd/service/home/post_detail_viewModel.dart';
+import 'package:bttd/service/user/sign_in_view.dart';
+import 'package:bttd/service/user/sign_in_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 class PostDetailView extends ConsumerWidget {
   static const routeName = 'PostDetailView';
@@ -13,6 +16,9 @@ class PostDetailView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    bool loginState = ref
+        .watch(SignInViewProvider)
+        .isLogined ?? false;
     final state = ref.watch(postDetailViewProvider);
     String _postTitle = state.boardModel?.post_title ?? '';
     String _user_age = state.boardModel?.user_age ?? '';
@@ -69,7 +75,10 @@ class PostDetailView extends ConsumerWidget {
                     ),
                     SizedBox(height: 20),
                     Container(
-                      width: MediaQuery.of(context).size.width,
+                      width: MediaQuery
+                          .of(context)
+                          .size
+                          .width,
                       color: Colors.red,
                       child: Text(
                         '$_post_context',
@@ -95,7 +104,23 @@ class PostDetailView extends ConsumerWidget {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Utils().customShowDialog(context: context, title: '로그인 후 이용해주세요',button_1: '확인', func_1: (){});
+                    if (!loginState) {
+                      Utils().customShowDialog(
+                        context: context,
+                        title: '로그인 후 이용해주세요.',
+                        actions: [
+                          TextButton(onPressed: () {
+                            context.pop();
+                            context.pushNamed(SignInView.routeName);
+                          }, child: Text('로그인')),
+                          TextButton(onPressed: () {
+                            context.pop();
+                          }, child: Text('닫기')),
+                        ],
+                      );
+                    } else {
+                      /// Todo: 댓글 남기는 로직
+                    }
                   },
                   child: Row(
                     children: [
@@ -120,9 +145,9 @@ class PostDetailView extends ConsumerWidget {
               ),
               Expanded(
                   child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 5),
-                child: Text('dfdfdfdfdfdfdfdfksjdflkjdslkfjlksdjflkdsjk'),
-              )),
+                    padding: EdgeInsets.symmetric(horizontal: 5),
+                    child: Text('dfdfdfdfdfdfdfdfksjdflkjdslkfjlksdjflkdsjk'),
+                  )),
               SizedBox(
                 width: 50,
                 child: IconButton(

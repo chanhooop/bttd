@@ -19,28 +19,30 @@ class UserRepository {
 
   /// 로그인 하기
   Future<bool> postSignIn(String email, String pw) async {
-    ResponseModel responseModel = await _dataSource.postSignIn(email, pw);
-    if (responseModel.status == "true") {
-      Map<String, dynamic> json;
-      print('로그인 성공');
-      json = responseModel.data as Map<String, dynamic>;
-      String isLogined = 'true';
-      String accessToken = json['accessToken'];
-      String refreshToken = json['refreshToken'];
-      // 토큰 저장 로직
-      await UserSecureStorage().writeLoginData(
-          isLogined: isLogined,
-          userId: email,
-          accessToken: accessToken,
-          refreshToken: refreshToken);
-      return true;
-    } else {
-      print('로그인 실패');
-      print('status : ${responseModel.status}');
-      print('message : ${responseModel.message}');
-      print('data : ${responseModel.data}');
-      return false;
-    }
+
+      ResponseModel responseModel = await _dataSource.postSignIn(email, pw);
+      if (responseModel.status == "true") {
+        Map<String, dynamic> json;
+        print('로그인 성공');
+        json = responseModel.data as Map<String, dynamic>;
+        String isLogined = 'true';
+        String accessToken = json['accessToken'];
+        String refreshToken = json['refreshToken'];
+        // 토큰 저장 로직
+        await UserSecureStorage().writeLoginData(
+            isLogined: isLogined,
+            userId: email,
+            accessToken: accessToken,
+            refreshToken: refreshToken);
+        return true;
+      } else {
+        print('로그인 실패');
+        print('status : ${responseModel.status}');
+        print('message : ${responseModel.message}');
+        print('data : ${responseModel.data}');
+        return false;
+      }
+
   }
 
   /// 내정보 가져오기 로직

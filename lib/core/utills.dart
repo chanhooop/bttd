@@ -22,43 +22,46 @@ class Utils {
       {required BuildContext context,
       String? title,
       String? content,
-      required String button_1,
-      String? button_2,
-      required VoidCallback func_1,
-      VoidCallback? func_2}) {
+        List<Widget>? actions
+      }) {
     showDialog(
         context: context,
         builder: (_) {
-          return Center(
-            child: Container(
-              width: 300,
-              height: 200,
-              color: Colors.red,
-              child: Stack(
-                children: [
-                  // 제목
-                  if (title != null)
-                    Positioned(top: 10, left: 10, child: Text(title)),
-                  // 내용
-                  if (content != null)
-                    Positioned(top: 40, left: 10, child: Text(content)),
-                  // 버튼 부분
-                  Positioned(
-                      bottom: 10,
-                      right: 10,
-                      child: Row(
-                        children: [
-                          TextButton(onPressed: func_1, child: Text(button_1)),
-                          if(button_2 != null)...[
-                            SizedBox(width: 20,),
-                            TextButton(onPressed: func_2 ?? (){}, child: Text(button_2)),
-                          ]
-                        ],
-                      ))
-                ],
-              ),
-            ),
+          return AlertDialog(
+            title: Text(title ?? ''),
+            content: Text(content ?? ''),
+            actions: actions,
           );
+          // return Center(
+          //   child: Container(
+          //     width: 300,
+          //     height: 200,
+          //     color: Colors.red,
+          //     child: Stack(
+          //       children: [
+          //         // 제목
+          //         if (title != null)
+          //           Positioned(top: 10, left: 10, child: Text(title)),
+          //         // 내용
+          //         if (content != null)
+          //           Positioned(top: 40, left: 10, child: Text(content)),
+          //         // 버튼 부분
+          //         Positioned(
+          //             bottom: 10,
+          //             right: 10,
+          //             child: Row(
+          //               children: [
+          //                 TextButton(onPressed: func_1, child: Text(button_1)),
+          //                 if(button_2 != null)...[
+          //                   SizedBox(width: 20,),
+          //                   TextButton(onPressed: func_2 ?? (){}, child: Text(button_2)),
+          //                 ]
+          //               ],
+          //             ))
+          //       ],
+          //     ),
+          //   ),
+          // );
         });
   }
 }
